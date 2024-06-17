@@ -1,5 +1,4 @@
-local utils 	= require('utils.utils')
-local tiny 		= require('libs.ecs.tiny-ecs')
+
 local wm 		= require("libs.ecs.world-manager")
 
 ------------------------------------------------------------------------------------------------------------
@@ -15,8 +14,6 @@ function init(self)
 	msg.post("@render:", "use_camera_projection")
 	msg.post("camera", "acquire_camera_focus")
 
-	wm:init( )
-	
 	-- rotate the cube
 	go.animate(".", "euler.z", go.PLAYBACK_LOOP_FORWARD, 360, go.EASING_INOUTQUAD, 6)
 	go.animate(".", "euler.x", go.PLAYBACK_LOOP_FORWARD, 360, go.EASING_INOUTQUAD, 9)
@@ -43,15 +40,14 @@ end
 ------------------------------------------------------------------------------------------------------------
 
 function final(self)
-	wm:final()
+	
 end
 
 ------------------------------------------------------------------------------------------------------------
 
 function update(self, dt)
-	wm:update(dt)
+	
 end
-
 
 ------------------------------------------------------------------------------------------------------------
 

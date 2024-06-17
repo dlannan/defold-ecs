@@ -47,7 +47,7 @@
                             <button type="button" id="navbar-fullscreen" class="nav-link"><i class="ik ik-maximize"></i></button>
                         </div>
                         <div class="top-menu d-flex align-items-center">
-                            <button type="button" class="nav-link ml-10 right-sidebar-toggle"><i class="ik ik-box"></i></button>
+                            <button type="button" class="nav-link ml-10 right-sidebar-toggle"><i class="ik ik-bookmark"></i></button>
                         </div>
                     </div>
                 </div>
@@ -66,7 +66,7 @@
                             <nav id="main-menu-navigation" class="navigation-main">
                                 <div class="nav-lavel">Debug</div>
                                 <div class="nav-item has-sub">
-                                    <a href="pages/ecs/entities.html" class="menu-item"><i class="ik ik-layers"></i><span>Worlds</span></a>
+                                    <a href="pages/ecs/world.html" class="menu-item"><i class="ik ik-layers"></i><span>Worlds</span></a>
                                     <div class="submenu-content">
                                         <a href="pages/examples/widgets.html" class="menu-item">Settings</a>
                                         <a href="pages/ecs/entities.html" class="menu-item">Entities</a>
@@ -127,10 +127,10 @@
                 <aside class="right-sidebar">
                     <div class="sidebar-chat" data-plugin="chat-sidebar">
                         <div class="sidebar-chat-info">
-                            <h6>Chat List</h6>
+                            <h6>Saved Entities</h6>
                             <form class="mr-t-10">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Search for friends ..."> 
+                                    <input type="text" class="form-control" placeholder="Search for entity ..."> 
                                     <i class="ik ik-search"></i>
                                 </div>
                             </form>
@@ -138,39 +138,28 @@
                         <div class="chat-list">
                             <div class="list-group row">
                                 <a href="javascript:void(0)" class="list-group-item" data-chat-user="Gene Newman">
-                                    <figure class="user--online">
-                                        <img src="img/users/1.jpg" class="rounded-circle" alt="">
-                                    </figure><span><span class="name">Gene Newman</span>  <span class="username">@gene_newman</span> </span>
+                                    <h5><i class="ik ik-box">&nbsp  </i></h5>
+                                    <span><span class="name">Car001</span>   </span>
                                 </a>
                                 <a href="javascript:void(0)" class="list-group-item" data-chat-user="Billy Black">
-                                    <figure class="user--online">
-                                        <img src="img/users/2.jpg" class="rounded-circle" alt="">
-                                    </figure><span><span class="name">Billy Black</span>  <span class="username">@billyblack</span> </span>
+                                    <h5><i class="ik ik-box">&nbsp  </i></h5>
+                                    <span><span class="name">Tree001</span>  </span>
                                 </a>
                                 <a href="javascript:void(0)" class="list-group-item" data-chat-user="Herbert Diaz">
-                                    <figure class="user--online">
-                                        <img src="img/users/3.jpg" class="rounded-circle" alt="">
-                                    </figure><span><span class="name">Herbert Diaz</span>  <span class="username">@herbert</span> </span>
+                                    <h5><i class="ik ik-box">&nbsp  </i></h5>
+                                    <span><span class="name">Car Sports 5</span>  </span>
                                 </a>
                                 <a href="javascript:void(0)" class="list-group-item" data-chat-user="Sylvia Harvey">
-                                    <figure class="user--busy">
-                                        <img src="img/users/4.jpg" class="rounded-circle" alt="">
-                                    </figure><span><span class="name">Sylvia Harvey</span>  <span class="username">@sylvia</span> </span>
+                                    <h5><i class="ik ik-image">&nbsp  </i></h5>
+                                    <span><span class="name">Soccer Environment</span> </span>
                                 </a>
-                                <a href="javascript:void(0)" class="list-group-item active" data-chat-user="Marsha Hoffman">
-                                    <figure class="user--busy">
-                                        <img src="img/users/5.jpg" class="rounded-circle" alt="">
-                                    </figure><span><span class="name">Marsha Hoffman</span>  <span class="username">@m_hoffman</span> </span>
+                                <a href="javascript:void(0)" class="list-group-item" data-chat-user="Sylvia Harvey">
+                                    <h5><i class="ik ik-camera">&nbsp  </i></h5>
+                                    <span><span class="name">Camera Main</span> </span>
                                 </a>
-                                <a href="javascript:void(0)" class="list-group-item" data-chat-user="Mason Grant">
-                                    <figure class="user--offline">
-                                        <img src="img/users/1.jpg" class="rounded-circle" alt="">
-                                    </figure><span><span class="name">Mason Grant</span>  <span class="username">@masongrant</span> </span>
-                                </a>
-                                <a href="javascript:void(0)" class="list-group-item" data-chat-user="Shelly Sullivan">
-                                    <figure class="user--offline">
-                                        <img src="img/users/2.jpg" class="rounded-circle" alt="">
-                                    </figure><span><span class="name">Shelly Sullivan</span>  <span class="username">@shelly</span></span>
+                                <a href="javascript:void(0)" class="list-group-item" data-chat-user="Sylvia Harvey">
+                                    <h5><i class="ik ik-box">&nbsp  </i></h5>
+                                    <span><span class="name">Tanker 06</span> </span>
                                 </a>
                             </div>
                         </div>
@@ -383,16 +372,15 @@
             if(current_template == null) return;
             $.get("/data/entities.dat", {}, function (res) {                      
                 let json = JSON.parse(res);
-                current_render = mustache.render(current_template, { "entities": json });
+                current_render = mustache.render(current_template, { json });
                 $("#main-content").html(current_render);    
             })
             .fail(function() {
                 // Get failed, populate with empty?
                 let json = {};
-                current_render = mustache.render(current_template, { "entities": json });
+                current_render = mustache.render(current_template, { json });
                 $("#main-content").html(current_render);    
             });            
-
         }
 
         function renderHtml( htmlfile ) {
@@ -409,7 +397,9 @@
             $( ".menu-item").on('click', function(e) {
                 e.preventDefault(); 
                 renderHtml(  $(this).attr('href') );
-            });         
+            });   
+
+            renderHtml("pages/ecs/dashboard.html");
         });
 
         </script>

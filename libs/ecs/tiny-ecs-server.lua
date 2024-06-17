@@ -6,10 +6,6 @@
 --				Can update objects remotely from http (localip)
 ------------------------------------------------------------------------------------------------------------
 
-local STinyECSServer	= {}
-
-------------------------------------------------------------------------------------------------------------
-
 local tinsert 		= table.insert
 
 local utils 		= require("utils.utils")
@@ -19,18 +15,23 @@ local http_server   = require "defnet.http_server"
 
 ------------------------------------------------------------------------------------------------------------
 
-STinyECSServer.entities = {}
-STinyECSServer.entities_lookup = {}
+local tinyserver	= {
+
+    entities            = {},
+    entities_lookup     = {},
+
+    update              = true,
+}
 
 ------------------------------------------------------------------------------------------------------------
 
-STinyECSServer.port            = 9190
-STinyECSServer.host            = "127.0.0.1"
+tinyserver.port            = 9190
+tinyserver.host            = "127.0.0.1"
 
 BACKLOG                        = 5
 
-STinyECSServer.updateRate     = 1.0  -- per second
-STinyECSServer.lastUpdate     = 0.0 
+tinyserver.updateRate     = 1.0  -- per second
+tinyserver.lastUpdate     = 0.0 
 
 ------------------------------------------------------------------------------------------------------------
 
@@ -46,69 +47,71 @@ local routes = {
 
 ------------------------------------------------------------------------------------------------------------
 
-local function register_get( self, route )
+local function register_get( route )
 
-    routes[route].ecs_server = self 
-    routes[route].http_server = self.http_server
+    routes[route].ecs_server = tinyserver 
+    routes[route].http_server = tinyserver.http_server
     for k,v in ipairs(routes[route].routes) do 
-        self.http_server.router.get( v.pattern, v.func )
+        tinyserver.http_server.router.get( v.pattern, v.func )
     end
 end
 
 ------------------------------------------------------------------------------------------------------------
 
-local function register_post( self, route )
+local function register_post( route )
 
-    routes[route].ecs_server = self 
-    routes[route].http_server = self.http_server
+    routes[route].ecs_server = tinyserver 
+    routes[route].http_server = tinyserver.http_server
     for k,v in ipairs(routes[route].routes) do 
-        self.http_server.router.post( v.pattern, v.func )
+        tinyserver.http_server.router.post( v.pattern, v.func )
     end
 end
 
 ------------------------------------------------------------------------------------------------------------
 
-local function startServer( self, host, port )
+local function startServer( host, port )
     
-    self.http_server = http_server.create(port)
+    tinyserver.http_server = http_server.create(port)
 
     -- Add routes here if you need to load in specific asset/mime types
-    register_get(self, "scripts")
-    register_get(self, "fonts")
-    register_get(self, "images")
-    register_get(self, "custom")
-    register_get(self, "xml")
+    register_get( "scripts")
+    register_get( "fonts")
+    register_get( "images")
+    register_get( "custom")
+    register_get( "xml")
     
-    register_post(self, "posts")
+    register_post( "posts")
 
-    register_get(self, "index")
+    register_get( "index")
 
 
-    self.http_server.router.unhandled(function(method, uri, stream, headers, body)
-        return self.http_server.html("404 - cannot find endpoint.", http_server.NOT_FOUND)
+    tinyserver.http_server.router.unhandled(function(method, uri, stream, headers, body)
+        return tinyserver.http_server.html("404 - cannot find endpoint.", http_server.NOT_FOUND)
     end)
-    self.http_server.start()
+    tinyserver.http_server.start()
 end 
 
 ------------------------------------------------------------------------------------------------------------
 -- This occurs on every entity 
-STinyECSServer.entitySystemProc = function(self, e, dt)
+tinyserver.entitySystemProc = function(self, e, dt)
 
-    if(self.update == false) then return end 
+    if(tinyserver.update == false) then return end 
     
     local idx = 1
-    if( e.id and STinyECSServer.entities_lookup[e.id] == nil and e.etype ~= "scene" ) then 
-
-        tinsert(STinyECSServer.entities, e)
-        idx = utils.tcount(STinyECSServer.entities)
-        STinyECSServer.entities_lookup[e.id] = idx
+    if( e.id and tinyserver.entities_lookup[e.id] == nil ) then 
+        
+        tinsert(tinyserver.entities, v)
+        idx = utils.tcount(tinyserver.entities)
+        tinyserver.entities_lookup[e.id] = idx
     else
+
         -- Continually updates the entities
-        idx = STinyECSServer.entities_lookup[e.id]
+        idx = tinyserver.entities_lookup[e.id]
         if(idx) then 
-            STinyECSServer.entities[idx] = e
+            tinyserver.entities[idx] = e
             -- Check for pos/rot updates - check for gamne object 
             if(e.go) then 
+
                 e.pos = go.get_position(e.go)
                 e.rot = go.get_rotation(e.go)
             end
@@ -118,8 +121,21 @@ end
 
 ------------------------------------------------------------------------------------------------------------
 
-function STinyECSServer:FindGo( go )
-    for k,v in pairs(STinyECSServer.entities) do 
+tinyserver.setWorlds = function( worlds )
+    tinyserver.worlds = worlds
+end
+
+------------------------------------------------------------------------------------------------------------
+
+tinyserver.setEntities = function(  entities )
+    tinyserver.entities = entities
+    tinyserver.entities_lookup = {}
+end
+
+------------------------------------------------------------------------------------------------------------
+
+tinyserver.findGo = function( go )
+    for k,v in pairs(tinyserver.entities) do 
         if (v.go == go) then return v end 
     end 
     return nil
@@ -127,32 +143,27 @@ end
 
 ------------------------------------------------------------------------------------------------------------
 
-function STinyECSServer:Begin()
+tinyserver.init = function()
 
     -- Start the server
-    startServer( self, STinyECSServer.host, STinyECSServer.port)
+    startServer( tinyserver.host, tinyserver.port)
 end
 
 ------------------------------------------------------------------------------------------------------------
 
-function STinyECSServer:Update()
+tinyserver.update = function ()
 
-    self.http_server.update()
-end
-
------------------------------------------------------------------------------------------------------------
-
-function STinyECSServer:Render()
+    tinyserver.http_server.update()
 end
 
 ------------------------------------------------------------------------------------------------------------
 
-function STinyECSServer:Finish()
-    self.http_server.stop()
+tinyserver.final = function(self)
+    tinyserver.http_server.stop()
 end
 
 ------------------------------------------------------------------------------------------------------------
 
-return STinyECSServer
+return tinyserver
 
 ------------------------------------------------------------------------------------------------------------
