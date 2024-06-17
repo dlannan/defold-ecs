@@ -15,7 +15,7 @@ function init(self)
 	msg.post("@render:", "use_camera_projection")
 	msg.post("camera", "acquire_camera_focus")
 
-	wm:init()
+	wm:init( )
 	
 	-- rotate the cube
 	go.animate(".", "euler.z", go.PLAYBACK_LOOP_FORWARD, 360, go.EASING_INOUTQUAD, 6)
@@ -33,9 +33,9 @@ function init(self)
 	go.set("#sphere", "light", self.light)
 
 	-- Add cameras as entities 
-	self.cube = wm:addGameObject( "cube", "#cube" )
-	self.quad = wm:addGameObject( "quad", "#quad" )
-	self.sphere = wm:addGameObject( "sphere", "#sphere" )
+	self.cube = wm:addGameObject( "cube", "/main#cube" )
+	self.quad = wm:addGameObject( "quad", "/main#quad" )
+	self.sphere = wm:addGameObject( "sphere", "/main#sphere" )
 
 	self.defaultSystem = wm:addSystem( "Default", { "name", "etype" }, defaultUpdate)	
 end

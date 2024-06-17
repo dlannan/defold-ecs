@@ -50,7 +50,7 @@ worldmanager.addGameObject = function( self, name, objurl )
 	local pos = go.get_position(objurl)
 	local rot = go.get_rotation(objurl)
 
-	local id = go.get_id(objurl)
+	local id = hash_to_hex(hash(objurl))
 	local obj = {
 		id = id,
 		go = objurl,
@@ -64,7 +64,7 @@ worldmanager.addGameObject = function( self, name, objurl )
 	}
 
 	-- Keep some handles so we can easily remove
-	self.entities[objurl] = obj
+	self.entities[id] = obj
 	return tiny.addEntity(self.world, obj)
 end
 
@@ -103,9 +103,23 @@ end
 
 ------------------------------------------------------------------------------------------------------------
 
-worldmanager.init = function(self)
+worldmanager.processOptions = function(self, options) 
+	if(options) then 
+		if(options.noserver == true) then 
+			tinysrv.Begin = function() end 
+			tinysrv.Finish = tinysrv.Begin
+			tinysrv.Update = tinysrv.Begin
+		end
+	end
+end
+
+------------------------------------------------------------------------------------------------------------
+
+worldmanager.init = function(self, options)
 
 	self.world = tiny.world()
+
+	self:processOptions(options)
 	tinysrv:Begin()
 
 	-- Add an updater for entities in the httpserver
