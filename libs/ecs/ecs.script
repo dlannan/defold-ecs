@@ -1,4 +1,6 @@
 go.property("server", true)
+go.property("server_host", msg.url("127.0.0.1"))
+go.property("server_port", 9190)
 
 ------------------------------------------------------------------------------------------------------------
 
@@ -9,7 +11,8 @@ local wm 		= require("libs.ecs.world-manager")
 ------------------------------------------------------------------------------------------------------------
 
 function init(self)
-	wm:init( )
+	local options = { host = self.server_host, port = self.server_port, noserver = not self.server }
+	wm:init( options )
 end
 
 ------------------------------------------------------------------------------------------------------------

@@ -144,6 +144,12 @@ worldmanager.processOptions = function(self, options)
 			tinysrv.final = tinysrv.init
 			tinysrv.update = tinysrv.init
 		end
+		if(options.host) then 
+			tinysrv.host = options.host
+		end
+		if(options.port) then 
+			tinysrv.port = options.port
+		end
 	end
 end
 
