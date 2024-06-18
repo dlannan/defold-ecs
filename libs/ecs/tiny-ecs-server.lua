@@ -76,10 +76,11 @@ local function startServer( host, port )
     tinyserver.http_server = http_server.create(port)
 
     -- Add routes here if you need to load in specific asset/mime types
+    register_get( "custom")
+
     register_get( "scripts")
     register_get( "fonts")
     register_get( "images")
-    register_get( "custom")
     register_get( "xml")
     
     register_post( "posts")

@@ -133,7 +133,7 @@ $(document).ready(function() {
    
     var enttable = $('#dt-ajax-object').DataTable({
         "ajax": {
-            url: "/data/entities.dat",
+            url: "/data/entities.json",
             dataSrc: "entities"
         },
         "scrollY": "600px",

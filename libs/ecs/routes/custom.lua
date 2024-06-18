@@ -7,7 +7,7 @@ local route = {
 }
 
 local entitydata = {
-    pattern = "/data/entities.dat", 
+    pattern = "/data/entities.json", 
     func = function(matches, stream, headers, body)
         local entities = json.encode( { entities = route.ecs_server.entities } )
 
@@ -19,12 +19,12 @@ local entitydata = {
         end)        
 
         entities = entities:gsub("vmath.quat", "quat")
-        return route.http_server.script(entities)
+        return route.http_server.json(entities)
     end,
 }
 
 local worlddata = {
-    pattern = "/data/worlds.dat", 
+    pattern = "/data/worlds.json", 
     func = function(matches, stream, headers, body)
         local copy = {}
         for k,v in pairs(route.ecs_server.worlds) do 
@@ -38,20 +38,20 @@ local worlddata = {
         end
         
         local worlds = json.encode( { worlds = copy } )      
-        return route.http_server.script(worlds)
+        return route.http_server.json(worlds)
     end,
 }
 
 local systemdata = {
-    pattern = "/data/systems.dat", 
+    pattern = "/data/systems.json", 
     func = function(matches, stream, headers, body)
         local systems = json.encode( { systems = route.ecs_server.systems } )      
-        return route.http_server.script(systems)
+        return route.http_server.json(systems)
     end,
 }
 
 local routesdata = {
-    pattern = "/data/routes.dat", 
+    pattern = "/data/routes.json", 
     func = function(matches, stream, headers, body)
         local copy = {}
         for k,v in pairs(route.ecs_server.routes) do 
@@ -66,7 +66,7 @@ local routesdata = {
         end
         
         local routes = json.encode( { routes = copy } )      
-        return route.http_server.script(routes)
+        return route.http_server.json(routes)
     end,
 }
 
