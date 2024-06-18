@@ -387,7 +387,6 @@
                 contentType: "text/plain",
                 dataType: "json",
                 success: function (res){      
-                    console.log(res);    
                     callback(res);
                 },
                 fail: function() {
@@ -418,7 +417,6 @@
         }
 
         function handleClick(e) {
-            console.log("Click");
             e.preventDefault(); 
             renderHtml(  $(this).attr('href') );
         };   
