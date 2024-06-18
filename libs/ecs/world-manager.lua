@@ -10,7 +10,9 @@ local utils 	= require('utils.utils')
 
 local worldmanager = {
 	worlds = {},
-    systems = {},
+	worlds_lookup = {},
+	systems = {},
+	systems_lookup = {},
 	entities = {},
 	entities_lookup = {},
 }
@@ -96,26 +98,41 @@ end
 
 worldmanager.addSystem = function( self, systemname, filters, processFunc )
 
-	if(self.systems[systemname]) then 
+	if(self.systems_lookup[systemname]) then 
 		print("[Error] System already exists: "..systemname)
 		return nil
 	else
 		local new_system = tiny.processingSystem()
 		new_system.filter = tiny.requireAll( unpack(filters) )
 		new_system.process = processFunc
-		self.systems[systemname] = tiny.addSystem(self.current_world, new_system)
+		tiny.addSystem(self.current_world, new_system)
+
+		local systeminfo = {
+			name = systemname,
+			filters = filters,
+		}
+		tinsert(self.systems, systeminfo)
+		self.systems_lookup[systemname] = utils.tcount(self.systems)
 	end
 end
 
 ------------------------------------------------------------------------------------------------------------
 -- Each world thats created we make a default proc to process for http server
-worldmanager.addWorld = function(self)
-	self.current_world = tiny.world()
-	-- Add an updater for entities in the httpserver
-	self:addSystem( "ECS_Entities", { "name", "etype" }, tinysrv.entitySystemProc )
+worldmanager.addWorld = function(self, worldname)
 
-	tinsert(self.worlds, self.current_world)
-	return utils.tcount(self.worlds)
+	if(self.worlds_lookup[worldname]) then 
+		print("[Error] World already exists: "..worldname)
+		return nil
+	else
+		self.current_world = tiny.world()
+		self.current_world.name = worldname
+		-- Add an updater for entities in the httpserver
+		self:addSystem( worldname.."Entities", { "name", "etype" }, tinysrv.entitySystemProc )
+
+		tinsert(self.worlds, self.current_world)
+		self.systems_lookup[worldname] = utils.tcount(self.worlds)
+		return utils.tcount(self.worlds)
+	end
 end
 
 ------------------------------------------------------------------------------------------------------------
@@ -138,6 +155,7 @@ worldmanager.init = function(self, options)
 	tinysrv.init()
 	tinysrv.setWorlds(self.worlds)
 	tinysrv.setEntities(self.entities)
+	tinysrv.setSystems(self.systems)
 end
 
 ------------------------------------------------------------------------------------------------------------
@@ -152,6 +170,8 @@ end
 ------------------------------------------------------------------------------------------------------------
 
 worldmanager.update = function(self, dt)
+	-- Handle direct world swapping
+	tinysrv.current_world = self.current_world
 	for k,v in pairs(self.worlds) do
 		v:update(dt)
 	end
@@ -160,7 +180,7 @@ end
 
 ------------------------------------------------------------------------------------------------------------
 
-worldmanager.default = worldmanager.default or worldmanager.addWorld(worldmanager)
+worldmanager.default = worldmanager.default or worldmanager.addWorld(worldmanager, "DefaultWorld")
 
 ------------------------------------------------------------------------------------------------------------
 

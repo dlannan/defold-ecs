@@ -18,7 +18,7 @@
                             <li class="breadcrumb-item">
                                 <a href="../index.html"><i class="ik ik-home"></i></a>
                             </li>
-                            <li class="breadcrumb-item active" aria-current="page">Bootstrap Tables</li>
+                            <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
                         </ol>
                     </nav>
                 </div>
@@ -32,7 +32,7 @@
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="state">
                                 <h6>ECS Worlds</h6>
-                                <h2>1</h2>
+                                <div id="world_count"></div>
                             </div>
                             <div class="icon">
                                 <i class="ik ik-globe"></i>
@@ -47,7 +47,7 @@
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="state">
                                 <h6>ECS Entiites</h6>
-                                <h2>123</h2>
+                                <div id="entities_count"></div>
                             </div>
                             <div class="icon">
                                 <i class="ik ik-box"></i>
@@ -62,7 +62,7 @@
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="state">
                                 <h6>ECS Cameras</h6>
-                                <h2>3</h2>
+                                <div id="camera_count"></div>
                             </div>
                             <div class="icon">
                                 <i class="ik ik-camera"></i>
@@ -77,7 +77,7 @@
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="state">
                                 <h6>System Filters</h6>
-                                <h2>5</h2>
+                                <div id="systems_count"></div>
                             </div>
                             <div class="icon">
                                 <i class="ik ik-server"></i>
@@ -89,12 +89,16 @@
         </div>      
 
         <div class="card">
-            <div class="card-header">
-                <div class="col col-nd-1">
+            <div class="card-header card-header-custom">
+                <div class="container-fluid">
+                <div class="row">
+                <div class="col col-md-12">
                     <h3>System Logging</h3>
                 </div>
+                </div>
 
-                <div class="col col-md-3">
+                <div class="row">
+                <div class="col col-md-4">
                     <div class="dropdown d-inline-block">
                         <a class="btn-icon checkbox-dropdown dropdown-toggle" href="#" id="moreDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
                         <div class="dropdown-menu" aria-labelledby="moreDropdown">
@@ -114,7 +118,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col col-md-3">
+                <div class="col col-md-4">
                     <div class="card-search with-adv-search dropdown">
                         <form action="">
                             <input type="text" class="form-control" placeholder="Search.." required>
@@ -134,77 +138,32 @@
                 </div>
                 <div class="col col-md-4">
                     <div class="card-options text-right">
-                        <span class="mr-5">1 - 50 of 2,500</span>
-                        <a href="#"><i class="ik ik-chevron-left"></i></a>
-                        <a href="#"><i class="ik ik-chevron-right"></i></a>
+                        <a href="#"><i class="ik ik-chevron-up"></i></a>
+                        <a href="#"><i class="ik ik-chevron-down"></i></a>
                     </div>
+                </div>
+                </div>
                 </div>
             </div>
             <div class="card-body p-0">
                 <div class="list-item-wrap">
+
                     <div class="list-item">
                         <div class="item-inner">
                             <label class="custom-control custom-checkbox">
                                 <input type="checkbox" class="custom-control-input" id="item_checkbox" name="item_checkbox" value="option1">
                                 <span class="custom-control-label">&nbsp;</span>
                             </label>
-                            <div class="list-title"><a href="javascript:void(0)">Lorem Ipsum is simply dumm dummy text of the printing and typesetting industry.</a></div>
+                            <div class="list-title">Lorem Ipsum is simply dumm dummy text of the printing and typesetting industry.</div>
                             <div class="list-actions">
-                                <a href="#"><i class="ik ik-eye"></i></a>
-                                <a href="#"><i class="ik ik-inbox"></i></a>
-                                <a href="#"><i class="ik ik-edit-2"></i></a>
                                 <a href="#"><i class="ik ik-trash-2"></i></a>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="qickview-wrap">
-                            <div class="desc">
-                                <p>Fusce suscipit turpis a dolor posuere ornare at a ante. Quisque nec libero facilisis, egestas tortor eget, mattis dui. Curabitur viverra laoreet ligula at hendrerit. Nullam sollicitudin maximus leo, vel pulvinar orci semper id. Donec vehicula tempus enim a facilisis. Proin dignissim porttitor sem, sed pulvinar tortor gravida vitae.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="list-item">
-                        <div class="item-inner">
-                            <label class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="item_checkbox" name="item_checkbox" value="option2">
-                                <span class="custom-control-label">&nbsp;</span>
-                            </label>
-                            <div class="list-title"><a href="javascript:void(0)">Aenean eu pharetra arcu, vitae elementum sem. Sed non ligula molestie, finibus lacus at, suscipit mi. Nunc luctus lacus vel felis blandit, eu finibus augue tincidunt.</a></div>
-                            <div class="list-actions">
-                                <a href="#"><i class="ik ik-eye"></i></a>
-                                <a href="#"><i class="ik ik-inbox"></i></a>
-                                <a href="#"><i class="ik ik-edit-2"></i></a>
-                                <a href="#"><i class="ik ik-trash-2"></i></a>
-                            </div>
-                        </div>
-                        <div class="qickview-wrap">
-                            <div class="desc">
-                                <p>Fusce suscipit turpis a dolor posuere ornare at a ante. Quisque nec libero facilisis, egestas tortor eget, mattis dui. Curabitur viverra laoreet ligula at hendrerit. Nullam sollicitudin maximus leo, vel pulvinar orci semper id. Donec vehicula tempus enim a facilisis. Proin dignissim porttitor sem, sed pulvinar tortor gravida vitae.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="list-item">
-                        <div class="item-inner">
-                            <label class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="item_checkbox" name="item_checkbox" value="option3">
-                                <span class="custom-control-label">&nbsp;</span>
-                            </label>
-                            <div class="list-title"><a href="javascript:void(0)">Donec lectus augue, suscipit in sodales sit amet, semper sit amet enim. Duis pretium, nisi id pretium ornare, tortor nibh sodales tellus.</a></div>
-                            <div class="list-actions">
-                                <a href="#"><i class="ik ik-eye"></i></a>
-                                <a href="#"><i class="ik ik-inbox"></i></a>
-                                <a href="#"><i class="ik ik-edit-2"></i></a>
-                                <a href="#"><i class="ik ik-trash-2"></i></a>
-                            </div>
-                        </div>
-                        <div class="qickview-wrap">
-                            <div class="desc">
-                                <p>Fusce suscipit turpis a dolor posuere ornare at a ante. Quisque nec libero facilisis, egestas tortor eget, mattis dui. Curabitur viverra laoreet ligula at hendrerit. Nullam sollicitudin maximus leo, vel pulvinar orci semper id. Donec vehicula tempus enim a facilisis. Proin dignissim porttitor sem, sed pulvinar tortor gravida vitae.</p>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script src="js/dashboard.js"></script>

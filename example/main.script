@@ -29,6 +29,9 @@ function init(self)
 	go.set("#quad", "light", self.light)
 	go.set("#sphere", "light", self.light)
 
+	self.cam = wm:addGameObject( "camera", "/camera" )
+	self.cam.etype = "camera"
+	
 	-- Add cameras as entities 
 	self.cube = wm:addGameObject( "cube", "/main#cube" )
 	self.quad = wm:addGameObject( "quad", "/main#quad" )

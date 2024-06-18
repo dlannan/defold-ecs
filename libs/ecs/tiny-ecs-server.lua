@@ -45,6 +45,8 @@ local routes = {
     posts       = require("libs.ecs.routes.posts"),
 }
 
+tinyserver.routes = routes
+
 ------------------------------------------------------------------------------------------------------------
 
 local function register_get( route )
@@ -84,7 +86,6 @@ local function startServer( host, port )
 
     register_get( "index")
 
-
     tinyserver.http_server.router.unhandled(function(method, uri, stream, headers, body)
         return tinyserver.http_server.html("404 - cannot find endpoint.", http_server.NOT_FOUND)
     end)
@@ -117,6 +118,12 @@ tinyserver.entitySystemProc = function(self, e, dt)
             end
         end
     end
+end
+
+------------------------------------------------------------------------------------------------------------
+
+tinyserver.setSystems = function( systems )
+    tinyserver.systems = systems
 end
 
 ------------------------------------------------------------------------------------------------------------

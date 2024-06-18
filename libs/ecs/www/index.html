@@ -354,7 +354,6 @@
         <script>window.jQuery || document.write('<script src="src/js/vendor/jquery-3.3.1.min.js"><\/script>')</script>
         <script src="plugins/popper.js/dist/umd/popper.min.js"></script>
         <script src="plugins/bootstrap/dist/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="plugins/mustache/mustache.js"></script>
 
         <script src="plugins/perfect-scrollbar/dist/perfect-scrollbar.min.js"></script>
         <script src="plugins/screenfull/dist/screenfull.js"></script>
@@ -376,6 +375,10 @@
         var current_render = null;
         var current_template = null;
 
+        var g_entities = null;
+        var g_worlds = null;
+        var g_systems = null;
+
         function updateData( dataname, callback ) {
             if(current_template == null) return;
             $.get("/data/" + dataname + ".dat", {}, function (res) {                      
@@ -393,20 +396,15 @@
                 .then((template) => {   
                     current_template = template;      
                     updateData("entities", function(entdata) {
+                        g_entities = entdata;
 
                         updateData("worlds", function(worlddata) {
-                            console.log(worlddata);
-
+                            g_worlds = worlddata;
+                            
                             updateData("systems", function(systemsdata)
                             {
-                                console.log(systemsdata);
-                                let template_data = { 
-                                    "entities": entdata,
-                                    "worlds": worlddata,
-                                    "systems": systemsdata
-                                };
-                                current_render = mustache.render(current_template, template_data);
-                                $("#main-content").html(current_render);    
+                                g_systems = systemsdata;
+                                $("#main-content").html(current_template);    
                             });                        
                         });
                     });

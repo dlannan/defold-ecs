@@ -1,3 +1,6 @@
+local tinsert           = table.insert
+
+local utils 		    = require("utils.utils")
 local route = {
     http_server = nil,
     ecs_server = nil,
@@ -42,9 +45,28 @@ local worlddata = {
 local systemdata = {
     pattern = "/data/systems.dat", 
     func = function(matches, stream, headers, body)
-        pprint(route.ecs_server.worlds[1].systems)
         local systems = json.encode( { systems = route.ecs_server.systems } )      
         return route.http_server.script(systems)
+    end,
+}
+
+local routesdata = {
+    pattern = "/data/routes.dat", 
+    func = function(matches, stream, headers, body)
+        local copy = {}
+        for k,v in pairs(route.ecs_server.routes) do 
+            local route = {}
+            for kk,vv in pairs(v.routes) do 
+                
+                if(vv.pattern) then 
+                    tinsert(route, vv.pattern)
+                end
+            end
+            copy[k] = route
+        end
+        
+        local routes = json.encode( { routes = copy } )      
+        return route.http_server.script(routes)
     end,
 }
 
@@ -52,6 +74,7 @@ route.routes = {
     entitydata,
     worlddata,
     systemdata,
+    routesdata,
 }
 
 return route
