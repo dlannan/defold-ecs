@@ -5,7 +5,7 @@ local route = {
 }
 
 local index_root = {
-    pattern = "/$", 
+    pattern = "/index.html[.+]?$", 
     func = function(matches, stream, headers, body)
         local index = utils.loaddata("libs/ecs/www/index.html")		
         return route.http_server.html(index)

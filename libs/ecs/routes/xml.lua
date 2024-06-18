@@ -5,7 +5,7 @@ local route = {
 }
 
 local xml_html = {
-    pattern = "/(.*%.html)$", 
+    pattern = "/(.-%.html)", 
     func = function(matches, stream, headers, body)
         local html = utils.loaddata("libs/ecs/www/"..matches[1])
         return route.http_server.html(html)

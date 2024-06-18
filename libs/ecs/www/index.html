@@ -57,24 +57,30 @@
                 <div class="app-sidebar colored">
                     <div class="sidebar-header">
                         <div class="header-brand">
-                            <span class="text">Tiny ECS</span>
+                            <a href="pages/ecs/dashboard.html" class="menu-item" style="color:white;"><span>Tiny ECS</span></a>
                         </div>
                     </div>
                     
                     <div class="sidebar-content">
                         <div class="nav-container">
                             <nav id="main-menu-navigation" class="navigation-main">
-                                <div class="nav-lavel">Debug</div>
-                                <div class="nav-item has-sub">
-                                    <a href="pages/ecs/world.html" class="menu-item"><i class="ik ik-layers"></i><span>Worlds</span></a>
-                                    <div class="submenu-content">
-                                        <a href="pages/examples/widgets.html" class="menu-item">Settings</a>
-                                        <a href="pages/ecs/entities.html" class="menu-item">Entities</a>
-                                    </div>
+                                <div class="nav-lavel">General</div>
+                                <div class="nav-item">
+                                    <a href="pages/ecs/settings.html" class="menu-item"><i class="ik ik-settings"></i><span>Settings</span></a>
                                 </div>
                                 <div class="nav-item">
-                                    <a href="pages/examples/table-bootstrap.html" class="menu-item"><i class="ik ik-credit-card"></i><span>Performance</span></a>
-                                </div>                                
+                                    <a href="pages/ecs/systems.html" class="menu-item"><i class="ik ik-server"></i><span>Systems</span></a>
+                                </div>
+                                <div class="nav-item">
+                                    <a href="pages/ecs/worlds.html" class="menu-item"><i class="ik ik-globe"></i><span>Worlds</span></a>
+                                </div>
+                                <div class="nav-item">
+                                    <a href="pages/ecs/entities.html" class="menu-item"><i class="ik ik-box"></i><span>Entities</span></a>
+                                </div>
+                                <div class="nav-item">
+                                    <a href="pages/ecs/performance.html" class="menu-item"><i class="ik ik-cpu"></i><span>Performance</span></a>
+                                </div>
+
                                 <div class="nav-lavel">Cameras</div>
                                 <div class="nav-item">
                                     <a href="pages/examples/table-bootstrap.html" class="menu-item"><i class="ik ik-credit-card"></i><span>Settings</span></a>
@@ -82,6 +88,7 @@
                                 <div class="nav-item">
                                     <a href="pages/examples/table-datatable.html" class="menu-item"><i class="ik ik-inbox"></i><span>Effects</span></a>
                                 </div>
+
                                 <div class="nav-lavel">Movie</div>
                                 <div class="nav-item has-sub">
                                     <a href="#"><i class="ik ik-box"></i><span>Acts</span></a>
@@ -104,6 +111,7 @@
                                 <div class="nav-item">
                                     <a href="pages/ui/icons.html" class="menu-item"><i class="ik ik-command"></i><span>Actions</span></a>
                                 </div>
+                                
                                 <div class="nav-lavel">Animation</div>
                                 <div class="nav-item has-sub">
                                     <a href="#"><i class="ik ik-edit"></i><span>Entity</span></a>
@@ -368,37 +376,51 @@
         var current_render = null;
         var current_template = null;
 
-        function updateData() {
+        function updateData( dataname, callback ) {
             if(current_template == null) return;
-            $.get("/data/entities.dat", {}, function (res) {                      
+            $.get("/data/" + dataname + ".dat", {}, function (res) {                      
                 let json = JSON.parse(res);
-                current_render = mustache.render(current_template, { json });
-                $("#main-content").html(current_render);    
+                callback(json);
             })
             .fail(function() {
-                // Get failed, populate with empty?
-                let json = {};
-                current_render = mustache.render(current_template, { json });
-                $("#main-content").html(current_render);    
+                callback({});
             });            
-        }
+        }      
 
         function renderHtml( htmlfile ) {
             fetch(htmlfile)
                 .then((response) => response.text())
                 .then((template) => {   
                     current_template = template;      
-                    updateData();
-            });
+                    updateData("entities", function(entdata) {
+
+                        updateData("worlds", function(worlddata) {
+                            console.log(worlddata);
+
+                            updateData("systems", function(systemsdata)
+                            {
+                                console.log(systemsdata);
+                                let template_data = { 
+                                    "entities": entdata,
+                                    "worlds": worlddata,
+                                    "systems": systemsdata
+                                };
+                                current_render = mustache.render(current_template, template_data);
+                                $("#main-content").html(current_render);    
+                            });                        
+                        });
+                    });
+            });   
         }
 
+        function handleClick(e) {
+            console.log("Click");
+            e.preventDefault(); 
+            renderHtml(  $(this).attr('href') );
+        };   
+
         $( document ).ready(function() {
-
-            $( ".menu-item").on('click', function(e) {
-                e.preventDefault(); 
-                renderHtml(  $(this).attr('href') );
-            });   
-
+            $(document).on('click', '.menu-item', handleClick);
             renderHtml("pages/ecs/dashboard.html");
         });
 

@@ -20,8 +20,38 @@ local entitydata = {
     end,
 }
 
+local worlddata = {
+    pattern = "/data/worlds.dat", 
+    func = function(matches, stream, headers, body)
+        local copy = {}
+        for k,v in pairs(route.ecs_server.worlds) do 
+            local wrld = {}
+            for kk,vv in pairs(v) do 
+                if(kk ~= "entities" and kk ~= "systems") then 
+                    wrld[kk] = vv
+                end
+            end
+            copy[k] = wrld
+        end
+        
+        local worlds = json.encode( { worlds = copy } )      
+        return route.http_server.script(worlds)
+    end,
+}
+
+local systemdata = {
+    pattern = "/data/systems.dat", 
+    func = function(matches, stream, headers, body)
+        pprint(route.ecs_server.worlds[1].systems)
+        local systems = json.encode( { systems = route.ecs_server.systems } )      
+        return route.http_server.script(systems)
+    end,
+}
+
 route.routes = {
     entitydata,
+    worlddata,
+    systemdata,
 }
 
 return route
