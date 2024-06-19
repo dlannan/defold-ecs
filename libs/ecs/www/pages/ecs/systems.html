@@ -19,7 +19,7 @@
                                             <li class="breadcrumb-item">
                                                 <a href="/index.html"><i class="ik ik-home"></i></a>
                                             </li>
-                                            <li class="breadcrumb-item active" aria-current="page">Worlds</li>
+                                            <li class="breadcrumb-item active" aria-current="page">Systems</li>
                                         </ol>
                                     </nav>
                                 </div>
@@ -28,33 +28,50 @@
 
                         <div class="row">
                             <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-header"><h3>Systems Select</h3></div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-6">
+<!-- Example split danger button -->
+<div class="btn-group">
+    <button id="systems-title" type="button" class="btn btn-secondary">System Select: </button>
+    <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <i class="ik ik-chevron-down"></i>
+    </button>
+    <div id="systems-select" class="dropdown-menu">
+    </div>
+</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">                            
+                            <div class="col-md-12">
 
                                 <div class="card">
-                                    <div class="card-header">
-                                        <h3>Radio</h3>
+                                    <div id="systems-card-title" class="card-header">
+                                        <h3>Filter System</h3>
                                     </div>
                                     <div class="card-body">
                                         <div class="row">
-                                            <div class="col-sm-12 col-md-6 col-xl-4 mb-30">
-                                                <h4 class="sub-title">Radio outline Button</h4>
+                                            <div class="col-md-12">
+                                                <h4 class="sub-title">Enable Filter System</h4>
                                                 <div class="form-radio">
                                                     <form>
                                                         <div class="radio radio-outline radio-inline">
                                                             <label>
                                                                 <input type="radio" name="radio" checked="checked">
-                                                                <i class="helper"></i>Radio 1
+                                                                <i class="helper"></i>Enable
                                                             </label>
                                                         </div>
                                                         <div class="radio radio-outline radio-inline">
                                                             <label>
                                                                 <input type="radio" name="radio">
-                                                                <i class="helper"></i>Radio 2
-                                                            </label>
-                                                        </div>
-                                                        <div class="radio radio-inline radio-disable">
-                                                            <label>
-                                                                <input type="radio" disabled="" name="radio">
-                                                                <i class="helper"></i>Radio Disable
+                                                                <i class="helper"></i>Disable
                                                             </label>
                                                         </div>
                                                     </form>
@@ -114,27 +131,64 @@
                             </div>
                         </div>
 
+                        <div class="row">     
+                            <div class="col-xl-4 col-md-12">
+                                <div class="card proj-t-card">
+                                    <div class="card-body">
+                                        <div class="row align-items-center mb-10">
+                                            <div class="col-auto">
+                                                <i class="far ik ik-box text-red f-30"></i>
+                                            </div>
+                                            <div class="col pl-0">
+                                                <h6 class="mb-5">Entities</h6>
+                                                <h6 class="mb-0 text-red">Live Update</h6>
+                                            </div>
+                                        </div>
+                                        <h6 class="pt-badge bg-red">5</h6>
+                                    </div>
+                                </div>
+                            </div>            
+                            <div class="col-xl-4 col-md-12">
+                                <div class="card proj-t-card">
+                                    <div class="card-body">
+                                        <div class="row align-items-center mb-10">
+                                            <div class="col-auto">
+                                                <i class="far ik ik-aperture text-red f-30"></i>
+                                            </div>
+                                            <div class="col pl-0">
+                                                <h6 class="mb-5">Filters</h6>
+                                                <h6 class="mb-0 text-red">Live Update</h6>
+                                            </div>
+                                        </div>
+                                        <h6 class="pt-badge bg-red">2</h6>
+                                    </div>
+                                </div>
+                            </div>   
+                            <div class="col-xl-4 col-md-12">
+                                <div class="card proj-t-card">
+                                    <div class="card-body">
+                                        <div class="row align-items-center mb-10">
+                                            <div class="col-auto">
+                                                <i class="far ik ik-list text-red f-30"></i>
+                                            </div>
+                                            <div class="col pl-0">
+                                                <h6 class="mb-5">Calls</h6>
+                                                <h6 class="mb-0 text-red">Live Update</h6>
+                                            </div>
+                                        </div>
+                                        <h6 class="pt-badge bg-red">1278</h6>
+                                    </div>
+                                </div>
+                            </div>                                                                       
+                        </div>                        
+
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="card">
-                                    <div class="card-header"><h3>World Select</h3></div>
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <form class="sample-form">
-                                                    <div class="form-group">
-                                                        <label for="">Select World for viewing: </label>
-                                                        <select class="form-control select2">
-                                                            <option value="cheese">Cheese</option>
-                                                            <option value="tomatoes">Tomatoes</option>
-                                                            <option value="mozarella">Mozzarella</option>
-                                                            <option value="mushrooms">Mushrooms</option>
-                                                            <option value="pepperoni">Pepperoni</option>
-                                                            <option value="onions">Onions</option>
-                                                        </select>
-                                                    </div>
-                                                </form>
-                                            </div>
+                                    <div class="card-header"><h3>System Filters</h3></div>
+                                    <div id="system-filters" class="card-body">
+                                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                            <text>Holy guacamole!</text>
                                         </div>
                                     </div>
                                 </div>
@@ -144,7 +198,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="card">
-                                    <div class="card-header"><h3>World Information</h3></div>
+                                    <div class="card-header"><h3>System Notes</h3></div>
                                     <div class="card-body">
                                         <textarea class="form-control html-editor" rows="10"></textarea>
                                     </div>
@@ -153,3 +207,5 @@
                         </div>
                     </div>
                 </div>
+<script src="plugins/summernote/dist/summernote-bs4.min.js"></script>
+<script src="js/systems.js"></script>

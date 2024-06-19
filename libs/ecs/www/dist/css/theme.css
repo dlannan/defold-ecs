@@ -593,6 +593,8 @@ a:hover, a:focus, a:active { outline: 0; text-decoration: none; color: #212121; 
 .card .nav-pills.custom-pills .nav-link { border-radius: 0; opacity: .7; font-size: 14px; padding: 12px 15px; }
 .card .nav-pills.custom-pills .nav-link.active { color: #ef4153; opacity: 1; background-color: transparent; border-bottom: 2px solid #ef4153; }
 
+.card .card-body .btn { font-size: 1.3em; line-height: 1.4em; color: #d8d8d8; font-weight: normal; height: 2.6em;}
+
 .widget { border-color: #ffff; position: relative; width: 100%; border: none; margin-bottom: 30px; background-color: #fff; overflow: hidden; -webkit-box-shadow: 0 6px 0 0 rgba(0, 0, 0, 0.01), 0 15px 32px 0 rgba(0, 0, 0, 0.06); -moz-box-shadow: 0 6px 0 0 rgba(0, 0, 0, 0.01), 0 15px 32px 0 rgba(0, 0, 0, 0.06); box-shadow: 0 6px 0 0 rgba(0, 0, 0, 0.01), 0 15px 32px 0 rgba(0, 0, 0, 0.06); -moz-transition: all 0.5s ease-in-out; -o-transition: all 0.5s ease-in-out; -webkit-transition: all 0.5s ease-in-out; transition: all 0.5s ease-in-out; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; }
 .widget .widget-header { padding: 10px 20px; border-bottom: 1px solid #f5f7f9; position: relative; }
 .widget .widget-header .widget-title { font-size: 18px; margin: 0; }
@@ -1328,6 +1330,7 @@ a:hover, a:focus, a:active { outline: 0; text-decoration: none; color: #212121; 
 .card .card-body .dataTables_wrapper .form-control { border: none; min-height: 30px; background-color: #f4f4f4; }
 .card .card-body .dataTables_wrapper th.sorting::before, th.sorting::after, th.sorting_asc::before, th.sorting_asc::after, th.sorting_desc::before, th.sorting_desc::after { color: white; top: 0px !important; }
 .card .card-body .dataTables_wrapper select.form-control { height: 30px !important; }
+.card .card-body .dataTables_wrapper select.form-control option { height: 30px !important; }
 .card .card-body .dataTables_wrapper .dataTables_paginate .pagination .page-item .page-link { margin-left: 5px; min-width: 30px; height: 30px; padding: 0; text-align: center; line-height: 30px; border: none; background-color: #f4f4f4; color: #212121; border-radius: 30px; -webkit-border-radius: 30px; -moz-border-radius: 30px; }
 .card .card-body .dataTables_wrapper .dataTables_paginate .pagination .page-item.previous .page-link, .card .card-body .dataTables_wrapper .dataTables_paginate .pagination .page-item.next .page-link, .card .card-body .dataTables_wrapper .dataTables_paginate .pagination .page-item.first .page-link, .card .card-body .dataTables_wrapper .dataTables_paginate .pagination .page-item.last .page-link { padding: 0 15px; }
 .card .card-body .dataTables_wrapper .dataTables_paginate .pagination .page-item.disabled .page-link { color: #6c757d; background-color: #f4f4f4; cursor: not-allowed; }
