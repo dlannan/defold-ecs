@@ -13,6 +13,9 @@ local tf 			= require("utils.transforms")
 local tiny          = require("libs.ecs.tiny-ecs")
 local http_server   = require "defnet.http_server"
 
+local fps 		    = require("libs.metrics.fps")
+local mem 		    = require("libs.metrics.mem")
+
 ------------------------------------------------------------------------------------------------------------
 
 local tinyserver	= {
@@ -21,6 +24,9 @@ local tinyserver	= {
     entities_lookup     = {},
 
     update              = true,
+    fps                 = 0,
+    mem                 = 0, 
+    deltas              = {},
 }
 
 ------------------------------------------------------------------------------------------------------------
@@ -160,7 +166,11 @@ end
 ------------------------------------------------------------------------------------------------------------
 
 tinyserver.update = function ()
-
+    -- metrics updated 
+    tinyserver.fps = fps.fps()
+    tinyserver.mem = mem.mem()
+    tinyserver.deltas = fps.deltas()
+    
     tinyserver.http_server.update()
 end
 

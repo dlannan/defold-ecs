@@ -78,7 +78,7 @@
                                     <a href="pages/ecs/entities.html" class="menu-item"><i class="ik ik-box"></i><span>Entities</span></a>
                                 </div>
                                 <div class="nav-item">
-                                    <a href="pages/ecs/performance.html" class="menu-item"><i class="ik ik-cpu"></i><span>Performance</span></a>
+                                    <a href="pages/ecs/performance.html" class="menu-item"><i class="ik ik-cpu"></i><span>Defold Metrics</span></a>
                                 </div>
 
                                 <div class="nav-lavel">Cameras</div>
@@ -375,19 +375,38 @@
         <script src="dist/js/theme.js"></script>
         <script>
 
-        var current_render = null;
         var current_template = null;
 
         var g_entities = null;
         var g_worlds = null;
         var g_systems = null;
 
-        function updateData( dataname, callback ) {
+        var g_current_world = null;
+
+        function postData( posturl, postdata, callback ) {
 
             $.ajax({
-                url: "/data/" + dataname + ".json",
+                type: "POST",
+                url: posturl,
+                data: JSON.stringify(postdata),
+                dataType: "text",
+                success: function (res) {      
+                    console.log(res);
+                    callback(res);
+                },
+                error: function(pkg, err) {
+                    console.log(err);
+                    callback({});
+                }            
+            });
+        } 
+
+        function updateData( dataurl, callback ) {
+
+            $.ajax({
+                url: dataurl,
                 async: false,
-                contentType: "text/plain",
+                contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (res){      
                     callback(res);
@@ -403,13 +422,13 @@
                 .then((response) => response.text())
                 .then((template) => {   
                     current_template = template;      
-                    updateData("entities", function(entdata) {
+                    updateData("/data/entities", function(entdata) {
                         g_entities = entdata;
 
-                        updateData("worlds", function(worlddata) {
+                        updateData("/data/worlds", function(worlddata) {
                             g_worlds = worlddata;
                             
-                            updateData("systems", function(systemsdata)
+                            updateData("/data/systems", function(systemsdata)
                             {
                                 g_systems = systemsdata;
                                 $("#main-content").html(current_template);    
@@ -428,6 +447,11 @@
 
             $(document).on('click', '.menu-item', handleClick);
             renderHtml("pages/ecs/dashboard.html");
+
+            updateData( "/data/world/current", function(res) {
+                g_current_world = res;
+                console.log(res);
+            });
         });
 
         </script>

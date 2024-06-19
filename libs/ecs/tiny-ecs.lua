@@ -325,6 +325,7 @@ local function processingSystemUpdate(system, dt)
                 process(system, entities[i], dt)
             end
         end
+        system.calls = system.calls + 1
     end
 
     if postProcess then
@@ -466,6 +467,7 @@ function tiny.addSystem(world, system)
     local s2a = world.systemsToAdd
     s2a[#s2a + 1] = system
     system.world = world
+    system.calls = 0
     return system
 end
 tiny_addSystem = tiny.addSystem

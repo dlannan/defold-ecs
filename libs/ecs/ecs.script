@@ -8,6 +8,9 @@ local utils 	= require('utils.utils')
 local tiny 		= require('libs.ecs.tiny-ecs')
 local wm 		= require("libs.ecs.world-manager")
 
+local fps 		= require("libs.metrics.fps")
+local mem 		= require("libs.metrics.mem")
+
 ------------------------------------------------------------------------------------------------------------
 
 function init(self)
@@ -24,6 +27,9 @@ end
 ------------------------------------------------------------------------------------------------------------
 
 function update(self, dt)
+	
+	fps.update(dt)
+	mem.update()
 	wm:update(dt)
 end
 

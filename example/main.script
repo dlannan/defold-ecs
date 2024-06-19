@@ -2,9 +2,33 @@
 local wm 		= require("libs.ecs.world-manager")
 
 ------------------------------------------------------------------------------------------------------------
+local rotation = vmath.vector3()
+local angle = 0
 
-local function defaultUpdate(self, e, dt)
-	-- print("Updating: "..e.name.."  "..dt)
+local function moverUpdate(self, e, dt)
+
+	-- Only update on the "main" go
+	if(e.name == "main") then 
+		-- print("Updating: "..e.name.."  "..dt.."  "..rotation.z)
+		go.set(e.go, "euler.z", rotation.z)
+		go.set(e.go, "euler.x", rotation.x)
+		go.set(e.go, "euler.y", rotation.y)
+
+		rotation.z = angle * 6.0
+		rotation.x = angle * 9.0
+		rotation.y = angle * 12.0
+	end
+end
+
+------------------------------------------------------------------------------------------------------------
+
+local function scalerUpdate(self, e, dt)
+
+	-- Only update on the "main" go
+	if(e.name == "main") then 
+		-- print("Updating: "..e.name.."  "..dt.."  "..rotation.z)
+		go.set_scale( 1 + angle / 180.0, e.go)
+	end
 end
 
 ------------------------------------------------------------------------------------------------------------
@@ -14,10 +38,10 @@ function init(self)
 	msg.post("@render:", "use_camera_projection")
 	msg.post("camera", "acquire_camera_focus")
 
-	-- rotate the cube
-	go.animate(".", "euler.z", go.PLAYBACK_LOOP_FORWARD, 360, go.EASING_INOUTQUAD, 6)
-	go.animate(".", "euler.x", go.PLAYBACK_LOOP_FORWARD, 360, go.EASING_INOUTQUAD, 9)
-	go.animate(".", "euler.y", go.PLAYBACK_LOOP_FORWARD, 360, go.EASING_INOUTQUAD, 12)
+	-- rotate the cube - Move this to my update. So can disable/enable via filters!
+	-- go.animate(".", "euler.z", go.PLAYBACK_LOOP_FORWARD, 360, go.EASING_INOUTQUAD, 6)
+	-- go.animate(".", "euler.x", go.PLAYBACK_LOOP_FORWARD, 360, go.EASING_INOUTQUAD, 9)
+	-- go.animate(".", "euler.y", go.PLAYBACK_LOOP_FORWARD, 360, go.EASING_INOUTQUAD, 12)
 
 	-- tint the cube and the sphere
 	go.set("#cube", "tint", vmath.vector4(1,1,0,1))
@@ -29,15 +53,18 @@ function init(self)
 	go.set("#quad", "light", self.light)
 	go.set("#sphere", "light", self.light)
 
+
 	self.cam = wm:addGameObject( "camera", "/camera" )
 	self.cam.etype = "camera"
 	
 	-- Add cameras as entities 
+	self.main = wm:addGameObject( "main", "/main" )
 	self.cube = wm:addGameObject( "cube", "/main#cube" )
 	self.quad = wm:addGameObject( "quad", "/main#quad" )
 	self.sphere = wm:addGameObject( "sphere", "/main#sphere" )
 
-	self.defaultSystem = wm:addSystem( "Default", { "name", "etype" }, defaultUpdate)	
+	self.defaultSystem = wm:addSystem( "MoverProcess", { "name", "etype" }, moverUpdate)	
+	self.defaultSystem = wm:addSystem( "ScalerProcess", { "name", "etype" }, scalerUpdate)	
 end
 
 ------------------------------------------------------------------------------------------------------------
@@ -49,7 +76,8 @@ end
 ------------------------------------------------------------------------------------------------------------
 
 function update(self, dt)
-	
+	angle = angle + 0.1
+	if(angle > 360) then angle = angle - 360.0 end
 end
 
 ------------------------------------------------------------------------------------------------------------

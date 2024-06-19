@@ -15,16 +15,28 @@ local posts_form = {
     end,
 }
 
-local posts_post = {
-    pattern = "/handlepost$", 
+local posts_systems = {
+    pattern = "/systems/enable$", 
     func = function(matches, stream, headers, body)
-        return route.http_server.html("Got post data: " .. tostring(body))
+
+        if(body == nil) then 
+            return route.http_server.html("failed. no post data.")
+        end
+        
+        local rdata = json.decode(body)
+        local sys = route.ecs_server.current_world.systems[rdata.system.index]
+        if( rdata.enabled == true) then
+            sys.active = true 
+        else
+            sys.active = false 
+        end
+        return route.http_server.html("success")
     end,
 }
 
 route.routes = {
     posts_form,
-    posts_post,
+    posts_systems,
 }
 
 return route

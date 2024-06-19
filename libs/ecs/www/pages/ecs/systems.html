@@ -35,7 +35,7 @@
                                             <div class="col-md-6">
 <!-- Example split danger button -->
 <div class="btn-group">
-    <button id="systems-title" type="button" class="btn btn-secondary">System Select: </button>
+    <button id="systems-title" type="button" data="-1" class="btn btn-secondary">System Select: </button>
     <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       <i class="ik ik-chevron-down"></i>
     </button>
@@ -49,6 +49,7 @@
                             </div>
                         </div>
 
+                        <div id="system-information">
                         <div class="row">                            
                             <div class="col-md-12">
 
@@ -64,66 +65,19 @@
                                                     <form>
                                                         <div class="radio radio-outline radio-inline">
                                                             <label>
-                                                                <input type="radio" name="radio" checked="checked">
+                                                                <input type="radio" id="system-enable" data="enable" name="radio" class="systems-set-enable" checked="checked">
                                                                 <i class="helper"></i>Enable
                                                             </label>
                                                         </div>
                                                         <div class="radio radio-outline radio-inline">
                                                             <label>
-                                                                <input type="radio" name="radio">
+                                                                <input type="radio" id="system-disable" data="disable" name="radio" class="systems-set-enable">
                                                                 <i class="helper"></i>Disable
                                                             </label>
                                                         </div>
                                                     </form>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <h4 class="sub-title">Color Radio Button</h4>
-                                        <div class="form-radio mb-30">
-                                            <form>
-                                                <div class="radio radiofill radio-default radio-inline">
-                                                    <label>
-                                                        <input type="radio" name="radio" checked="checked">
-                                                        <i class="helper"></i>Default Color
-                                                    </label>
-                                                </div>
-                                                <div class="radio radiofill radio-primary radio-inline">
-                                                    <label>
-                                                        <input type="radio" name="radio" checked="checked">
-                                                        <i class="helper"></i>Primary Color
-                                                    </label>
-                                                </div>
-                                                <div class="radio radiofill radio-success radio-inline">
-                                                    <label>
-                                                        <input type="radio" name="radio" checked="checked">
-                                                        <i class="helper"></i>Success Color
-                                                    </label>
-                                                </div>
-                                                <div class="radio radiofill radio-info radio-inline">
-                                                    <label>
-                                                        <input type="radio" name="radio" checked="checked">
-                                                        <i class="helper"></i>Info Color
-                                                    </label>
-                                                </div>
-                                                <div class="radio radiofill radio-warning radio-inline">
-                                                    <label>
-                                                        <input type="radio" name="radio" checked="checked">
-                                                        <i class="helper"></i>Warning Color
-                                                    </label>
-                                                </div>
-                                                <div class="radio radiofill radio-danger radio-inline">
-                                                    <label>
-                                                        <input type="radio" name="radio" checked="checked">
-                                                        <i class="helper"></i>Danger Color
-                                                    </label>
-                                                </div>
-                                                <div class="radio radiofill radio-inverse radio-inline">
-                                                    <label>
-                                                        <input type="radio" name="radio" checked="checked">
-                                                        <i class="helper"></i>Inverse Color
-                                                    </label>
-                                                </div>
-                                            </form>
                                         </div>
                                     </div>
                                 </div>
@@ -137,14 +91,14 @@
                                     <div class="card-body">
                                         <div class="row align-items-center mb-10">
                                             <div class="col-auto">
-                                                <i class="far ik ik-box text-red f-30"></i>
+                                                <i class="far ik ik-box text-blue f-30"></i>
                                             </div>
                                             <div class="col pl-0">
                                                 <h6 class="mb-5">Entities</h6>
-                                                <h6 class="mb-0 text-red">Live Update</h6>
+                                                <h6 class="mb-0 text-blue">Live Update</h6>
                                             </div>
                                         </div>
-                                        <h6 class="pt-badge bg-red">5</h6>
+                                        <h6 id="systems-entities" class="pt-badge bg-blue">5</h6>
                                     </div>
                                 </div>
                             </div>            
@@ -160,7 +114,7 @@
                                                 <h6 class="mb-0 text-red">Live Update</h6>
                                             </div>
                                         </div>
-                                        <h6 class="pt-badge bg-red">2</h6>
+                                        <h6 id="systems-filters" class="pt-badge bg-red">2</h6>
                                     </div>
                                 </div>
                             </div>   
@@ -169,14 +123,14 @@
                                     <div class="card-body">
                                         <div class="row align-items-center mb-10">
                                             <div class="col-auto">
-                                                <i class="far ik ik-list text-red f-30"></i>
+                                                <i class="far ik ik-list text-green f-30"></i>
                                             </div>
                                             <div class="col pl-0">
                                                 <h6 class="mb-5">Calls</h6>
-                                                <h6 class="mb-0 text-red">Live Update</h6>
+                                                <h6 class="mb-0 text-green">Live Update</h6>
                                             </div>
                                         </div>
-                                        <h6 class="pt-badge bg-red">1278</h6>
+                                        <h6 id="systems-calls" class="pt-badge bg-green">1278</h6>
                                     </div>
                                 </div>
                             </div>                                                                       
@@ -204,6 +158,7 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
                         </div>
                     </div>
                 </div>

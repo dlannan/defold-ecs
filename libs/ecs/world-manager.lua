@@ -105,12 +105,17 @@ worldmanager.addSystem = function( self, systemname, filters, processFunc )
 		local new_system = tiny.processingSystem()
 		new_system.filter = tiny.requireAll( unpack(filters) )
 		new_system.process = processFunc
-		tiny.addSystem(self.current_world, new_system)
+		local out_system = tiny.addSystem(self.current_world, new_system)
+		self.current_world:update(0)
 
 		local systeminfo = {
 			name = systemname,
 			filters = filters,
+			index = out_system.index,
+			active = out_system.active,
+			modified = out_system.modified,
 		}
+		
 		tinsert(self.systems, systeminfo)
 		self.systems_lookup[systemname] = utils.tcount(self.systems)
 	end
