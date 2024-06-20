@@ -34,9 +34,28 @@ local posts_systems = {
     end,
 }
 
+local posts_cameraenable = {
+    pattern = "/world/camera/enable$", 
+    func = function(matches, stream, headers, body)
+
+        if(body == nil) then 
+            return route.http_server.html("failed. no post data.")
+        end
+
+        local cdata = json.decode(body)
+        local camera = route.ecs_server.entities[cdata.index]
+        msg.post(camera.go, "acquire_camera_focus")
+        
+        return route.http_server.html("success")
+    end,
+}
+
+
 route.routes = {
     posts_form,
     posts_systems,
+
+    posts_cameraenable,
 }
 
 return route

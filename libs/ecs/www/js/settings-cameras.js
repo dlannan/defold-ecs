@@ -1,29 +1,50 @@
+function formatVec( param )  {
+  let vec = "x:" + param.x + ", ";
+  vec = vec + "y:" + param.y + ", ";
+  vec = vec + "z:" + param.z;
+  if(param.w) vec = vec + ", w:" + param.w;
+  return vec;
+}
+
+function UpdateCameraProps( index )
+{
+  if(g_cameras.cameras.length > 0) {
+
+    let html_props = "";
+    var cam = g_cameras.cameras[index];
+    console.log(cam);
+    // By default set the first camera when starting (if there are any)
+    for (let [key, item] of Object.entries(cam))   {
+      if(key == "rot" || key == "pos") item = formatVec(item);
+      html_props = html_props + '<tr>';
+      html_props = html_props + '<td>' + key + '</td>';
+      html_props = html_props + '<td>' + item + '</td>';
+      html_props = html_props + '<td><a href="#!"><i class="ik ik-edit f-16 mr-15 text-green"></i></a></td>';
+      html_props = html_props + '</tr>';
+    }
+    $("#camera-props table tbody").html(html_props);
+  }
+}
+
 $(document).ready(function() {
-  
-  $(".entities-set-enable").on('click', function(e) {
-    let name = $(e.target).attr("data");
-    let enabled = false;
-    if(name == "enable") enabled = true;
 
-    let index = $("#systems-title").attr("data");
-    let system = g_systems.systems[index];
-    let senddata = { enabled: enabled, system: system };
-
-    // Probably should check status and data
-    postData("/systems/enable", senddata, function(data, status) {
+  updateData("/data/world/cameras", function(cameras) {
+    var html_cameras = "";
+    g_cameras = cameras;
+    
+    cameras.cameras.forEach( function(cam, index, arr) {
+      html_cameras = html_cameras + '<div class="row">';
+      html_cameras = html_cameras + '<div class="col-auto text-right update-meta pr-0">';
+      html_cameras = html_cameras + '<i class="ik ik-camera bg-blue update-icon"></i>';
+      html_cameras = html_cameras + '</div>';
+      html_cameras = html_cameras + '<div class="col pl-5">';
+      html_cameras = html_cameras + '<a href="#!"><h6>' + cam.name + '</h6></a>';
+      html_cameras = html_cameras + '</div></div>';
     });
+    
+    $("#cameras-list").html(html_cameras);
+    UpdateCameraProps(0);
   });
 
-  updateData("/data/routes", function(routedata) {
-    var html_routes = "";
-    for (let [key, item] of Object.entries(routedata.routes))   {
-      item.forEach( function(rt, index, arr) {
-        html_routes = html_routes + '<div class="alert bg-dark alert-dark text-white" role="alert">';
-        html_routes = html_routes + '<text><b>' + key + ": </b></text><code>" + rt + '</code>';
-        html_routes = html_routes + '</div>';
-      });
-    };
-
-    $("#server-routes").html(html_routes);
-  })
+  UpdateCameraProps(0);
 });

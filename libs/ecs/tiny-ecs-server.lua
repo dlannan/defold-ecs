@@ -109,7 +109,7 @@ tinyserver.entitySystemProc = function(self, e, dt)
     local idx = 1
     if( e.id and tinyserver.entities_lookup[e.id] == nil ) then 
         
-        tinsert(tinyserver.entities, v)
+        tinsert(tinyserver.entities, e)
         idx = utils.tcount(tinyserver.entities)
         tinyserver.entities_lookup[e.id] = idx
         if(e.etype == "camera") then 

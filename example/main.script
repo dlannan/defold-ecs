@@ -55,6 +55,7 @@ function init(self)
 
 
 	self.cam = wm:addCamera( "camera", "/camera#camera" )
+	self.topcam = wm:addCamera( "topcamera", "/topcamera#camera" )
 	
 	-- Add cameras as entities 
 	self.main = wm:addGameObject( "main", "/main" )
