@@ -68,7 +68,6 @@ $(document).ready(function() {
 
             updateData( "/data/defold/metrics",function(metrics) {
 
-                console.log("Mem: " + metrics.metrics.mem);
                 memdata.push(metrics.metrics.mem);
                 if(memdata.length > 60) memdata.shift();
             });

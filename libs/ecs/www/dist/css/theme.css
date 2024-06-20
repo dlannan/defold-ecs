@@ -844,7 +844,9 @@ a:hover, a:focus, a:active { outline: 0; text-decoration: none; color: #212121; 
 
 .latest-update-card .card-block { padding-top: 0; }
 .latest-update-card .card-block .latest-update-box { position: relative; }
-.latest-update-card .card-block .latest-update-box:after { content: ""; position: absolute; background: #ebebeb; height: 100%; width: 3px; top: 0; left: 19px; z-index: 1; }
+.latest-update-card .card-block .latest-update-box .row { line-height: 4.0; padding: 4px; align-items: baseline; }
+.latest-update-card .card-block .latest-update-box .row:hover { background-color: #404e67; }
+.latest-update-card .card-block .latest-update-box:after { content: ""; position: absolute; height: 100%; width: 3px; top: 0; left: 19px; z-index: 1; }
 .latest-update-card .card-block .latest-update-box .update-meta { z-index: 2; }
 .latest-update-card .card-block .latest-update-box .update-meta .update-icon { width: 30px; height: 30px; border-radius: 50%; text-align: center; padding: 7px 8px; font-size: 16px; color: #fff; }
 .latest-update-card .card-block .latest-update-box .update-meta .update-icon.bg-red { box-shadow: 0 0 0 4px rgba(245, 54, 92, 0.5); }

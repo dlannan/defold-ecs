@@ -4,6 +4,15 @@ local route = {
     ecs_server = nil,
 }
 
+local scripts_json = {
+    pattern = "/(.*%.json)%??.*$", 
+    func = function(matches, stream, headers, body)
+        local json = utils.loaddata("libs/ecs/www/"..matches[1])		
+        return route.http_server.json(json)
+    end,
+}
+
+
 local scripts_js = {
     pattern = "/(.*%.js)%??.*$", 
     func = function(matches, stream, headers, body)
@@ -28,7 +37,9 @@ local scripts_css_map = {
     end,
 }
 
+-- Order is important!!
 route.routes = {
+    scripts_json,
     scripts_js,
     scripts_css,
     scripts_css_map,

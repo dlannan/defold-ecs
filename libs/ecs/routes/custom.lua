@@ -24,7 +24,7 @@ local entitydata = {
 }
 
 local worlddata = {
-    pattern = "/data/worlds", 
+    pattern = "/data/worlds$", 
     func = function(matches, stream, headers, body)
         local copy = {}
         for k,v in pairs(route.ecs_server.worlds) do 
@@ -43,7 +43,7 @@ local worlddata = {
 }
 
 local systemdata = {
-    pattern = "/data/systems", 
+    pattern = "/data/systems$", 
     func = function(matches, stream, headers, body)
 
         -- Add data from the systems on data requests
@@ -62,7 +62,7 @@ local systemdata = {
 }
 
 local routesdata = {
-    pattern = "/data/routes", 
+    pattern = "/data/routes$", 
     func = function(matches, stream, headers, body)
         local copy = {}
         for k,v in pairs(route.ecs_server.routes) do 
@@ -82,7 +82,7 @@ local routesdata = {
 }
 
 local worldcurrent = {
-    pattern = "/data/world/current", 
+    pattern = "/data/world/current$", 
     func = function(matches, stream, headers, body)
 
         local curr_world = route.ecs_server.current_world
@@ -108,8 +108,39 @@ local worldcurrent = {
     end,
 }
 
+local worldcameras = {
+    pattern = "/data/world/cameras$", 
+    func = function(matches, stream, headers, body)
+
+        local curr_world = route.ecs_server.current_world
+        local entities = route.ecs_server.entities
+        local cameras = {
+            world = curr_world.name, 
+            cameras = {},
+        }
+        for k,v in pairs(route.ecs_server.cameras_lookup) do 
+            local cam = entities[v]
+            local camera = {
+                id = cam.id,
+                name = cam.name,
+                pos = { x=cam.pos.x, y=cam.pos.y, z=cam.pos.z },
+                rot = { x=cam.rot.x, y=cam.rot.y, z=cam.rot.z, w=cam.rot.w },
+                go = cam.go,
+                created = cam.created,
+
+                fov = cam.fov,
+                near = cam.near,
+                far = cam.far,
+                aspect = cam.aspect,
+            }
+            tinsert(cameras.cameras, camera)
+        end
+        return route.http_server.json( json.encode(cameras) )
+    end,
+}
+
 local defoldmetrics = {
-    pattern = "/data/defold/metrics", 
+    pattern = "/data/defold/metrics$", 
     func = function(matches, stream, headers, body)
 
         local srcdata = route.ecs_server
@@ -131,6 +162,7 @@ route.routes = {
     routesdata,
 
     worldcurrent,
+    worldcameras,
     defoldmetrics,
 }
 

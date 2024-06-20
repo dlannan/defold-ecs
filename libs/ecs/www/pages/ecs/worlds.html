@@ -19,6 +19,9 @@
                                             <li class="breadcrumb-item">
                                                 <a href="/index.html"><i class="ik ik-home"></i></a>
                                             </li>
+                                            <li class="breadcrumb-item">
+                                                <a href="#">General</a>
+                                            </li>
                                             <li class="breadcrumb-item active" aria-current="page">Worlds</li>
                                         </ol>
                                     </nav>
@@ -28,113 +31,104 @@
 
                         <div class="row">
                             <div class="col-md-12">
-
                                 <div class="card">
-                                    <div class="card-header">
-                                        <h3>Radio</h3>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-sm-12 col-md-6 col-xl-4 mb-30">
-                                                <h4 class="sub-title">Radio outline Button</h4>
-                                                <div class="form-radio">
-                                                    <form>
-                                                        <div class="radio radio-outline radio-inline">
-                                                            <label>
-                                                                <input type="radio" name="radio" checked="checked">
-                                                                <i class="helper"></i>Radio 1
-                                                            </label>
-                                                        </div>
-                                                        <div class="radio radio-outline radio-inline">
-                                                            <label>
-                                                                <input type="radio" name="radio">
-                                                                <i class="helper"></i>Radio 2
-                                                            </label>
-                                                        </div>
-                                                        <div class="radio radio-inline radio-disable">
-                                                            <label>
-                                                                <input type="radio" disabled="" name="radio">
-                                                                <i class="helper"></i>Radio Disable
-                                                            </label>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <h4 class="sub-title">Color Radio Button</h4>
-                                        <div class="form-radio mb-30">
-                                            <form>
-                                                <div class="radio radiofill radio-default radio-inline">
-                                                    <label>
-                                                        <input type="radio" name="radio" checked="checked">
-                                                        <i class="helper"></i>Default Color
-                                                    </label>
-                                                </div>
-                                                <div class="radio radiofill radio-primary radio-inline">
-                                                    <label>
-                                                        <input type="radio" name="radio" checked="checked">
-                                                        <i class="helper"></i>Primary Color
-                                                    </label>
-                                                </div>
-                                                <div class="radio radiofill radio-success radio-inline">
-                                                    <label>
-                                                        <input type="radio" name="radio" checked="checked">
-                                                        <i class="helper"></i>Success Color
-                                                    </label>
-                                                </div>
-                                                <div class="radio radiofill radio-info radio-inline">
-                                                    <label>
-                                                        <input type="radio" name="radio" checked="checked">
-                                                        <i class="helper"></i>Info Color
-                                                    </label>
-                                                </div>
-                                                <div class="radio radiofill radio-warning radio-inline">
-                                                    <label>
-                                                        <input type="radio" name="radio" checked="checked">
-                                                        <i class="helper"></i>Warning Color
-                                                    </label>
-                                                </div>
-                                                <div class="radio radiofill radio-danger radio-inline">
-                                                    <label>
-                                                        <input type="radio" name="radio" checked="checked">
-                                                        <i class="helper"></i>Danger Color
-                                                    </label>
-                                                </div>
-                                                <div class="radio radiofill radio-inverse radio-inline">
-                                                    <label>
-                                                        <input type="radio" name="radio" checked="checked">
-                                                        <i class="helper"></i>Inverse Color
-                                                    </label>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="card">
-                                    <div class="card-header"><h3>World Select</h3></div>
+                                    <div class="card-header"><h3>Systems Select</h3></div>
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <form class="sample-form">
-                                                    <div class="form-group">
-                                                        <label for="">Select World for viewing: </label>
-                                                        <select class="form-control select2">
-                                                            <option value="cheese">Cheese</option>
-                                                            <option value="tomatoes">Tomatoes</option>
-                                                            <option value="mozarella">Mozzarella</option>
-                                                            <option value="mushrooms">Mushrooms</option>
-                                                            <option value="pepperoni">Pepperoni</option>
-                                                            <option value="onions">Onions</option>
-                                                        </select>
-                                                    </div>
-                                                </form>
+<div class="btn-group">
+    <button id="worlds-title" type="button" data="-1" class="btn btn-secondary">World Select: </button>
+    <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <i class="ik ik-chevron-down"></i>
+    </button>
+    <div id="worlds-select" class="dropdown-menu">
+    </div>
+</div>
                                             </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="system-information">
+                        <div class="row">                            
+                            <div class="col-md-12">
+
+                                <div class="card">
+                                    <div id="worlds-card-title" class="card-header">
+                                        <h3>World Information</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <h4 class="sub-title">World</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="row">     
+                            <div class="col-xl-4 col-md-12">
+                                <div class="card proj-t-card">
+                                    <div class="card-body">
+                                        <div class="row align-items-center mb-10">
+                                            <div class="col-auto">
+                                                <i class="far ik ik-box text-blue f-30"></i>
+                                            </div>
+                                            <div class="col pl-0">
+                                                <h6 class="mb-5">Entities</h6>
+                                                <h6 class="mb-0 text-blue">Live Update</h6>
+                                            </div>
+                                        </div>
+                                        <h6 id="worlds-entities" class="pt-badge bg-blue">5</h6>
+                                    </div>
+                                </div>
+                            </div>            
+                            <div class="col-xl-4 col-md-12">
+                                <div class="card proj-t-card">
+                                    <div class="card-body">
+                                        <div class="row align-items-center mb-10">
+                                            <div class="col-auto">
+                                                <i class="far ik ik-aperture text-red f-30"></i>
+                                            </div>
+                                            <div class="col pl-0">
+                                                <h6 class="mb-5">Filters</h6>
+                                                <h6 class="mb-0 text-red">Live Update</h6>
+                                            </div>
+                                        </div>
+                                        <h6 id="worlds-filters" class="pt-badge bg-red">2</h6>
+                                    </div>
+                                </div>
+                            </div>   
+                            <div class="col-xl-4 col-md-12">
+                                <div class="card proj-t-card">
+                                    <div class="card-body">
+                                        <div class="row align-items-center mb-10">
+                                            <div class="col-auto">
+                                                <i class="far ik ik-list text-green f-30"></i>
+                                            </div>
+                                            <div class="col pl-0">
+                                                <h6 class="mb-5">Cameras</h6>
+                                                <h6 class="mb-0 text-green">Live Update</h6>
+                                            </div>
+                                        </div>
+                                        <h6 id="worlds-cameras" class="pt-badge bg-green">1</h6>
+                                    </div>
+                                </div>
+                            </div>                                                                       
+                        </div>                        
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-header"><h3>Entity Summary</h3></div>
+                                    <div id="worlds-filters" class="card-body">
+                                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                            <text>Holy guacamole!</text>
                                         </div>
                                     </div>
                                 </div>
@@ -144,12 +138,15 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="card">
-                                    <div class="card-header"><h3>World Information</h3></div>
+                                    <div class="card-header"><h3>System Notes</h3></div>
                                     <div class="card-body">
-                                        <textarea class="form-control html-editor" rows="10"></textarea>
+                                        <textarea class="form-control worlds-html-editor" rows="10"></textarea>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        </div>
                     </div>
                 </div>
+<script src="plugins/summernote/dist/summernote-bs4.min.js"></script>
+<script src="js/worlds.js"></script>

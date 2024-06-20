@@ -78,6 +78,46 @@ end
 
 ------------------------------------------------------------------------------------------------------------
 
+worldmanager.addCamera = function( self, name, objurl )
+
+	if(name == nil) then 
+		print("[Error] Entity doesnt have a name.")
+		return nil 
+	end 
+	local pos = go.get_position(objurl)
+	local rot = go.get_rotation(objurl)
+
+	local aspect = go.get(objurl, "aspect_ratio") -- get aspect ratio
+	local near = go.get(objurl, "near_z") -- get far z
+	local far = go.get(objurl, "far_z") -- get far z
+	local fov = go.get(objurl, "fov") -- get field of view
+
+	local id = hash_to_hex(hash(objurl))
+	local obj = {
+		id = id,
+		go = objurl,
+		name = name, 
+		etype = "camera",
+		created = socket.gettime(),
+		visible = 1,
+		pos = { x=pos.x, y=pos.y, z=pos.z },
+		rot = { x=rot.x, y=rot.y, z=rot.z, w=rot.w },
+		scale = { 1, 1, 1 },
+
+		fov = fov,
+		aspect = aspect, 
+		near = near, 
+		far = far,
+	}
+
+	-- Keep some handles so we can easily remove
+	tinsert(self.entities, obj)
+	self.entities_lookup[obj.id] = utils.tcount(self.entities)
+	return tiny.addEntity(self.current_world, obj)
+end
+
+------------------------------------------------------------------------------------------------------------
+
 worldmanager.removeEntity = function( self, eid )
 
 	if(eid == nil) then 
@@ -117,7 +157,7 @@ worldmanager.addSystem = function( self, systemname, filters, processFunc )
 		}
 		
 		tinsert(self.systems, systeminfo)
-		self.systems_lookup[systemname] = utils.tcount(self.systems)
+		self.systems_lookup[systemname] = out_system.index
 	end
 end
 
@@ -132,7 +172,7 @@ worldmanager.addWorld = function(self, worldname)
 		self.current_world = tiny.world()
 		self.current_world.name = worldname
 		-- Add an updater for entities in the httpserver
-		self:addSystem( worldname.."Entities", { "name", "etype" }, tinysrv.entitySystemProc )
+		self:addSystem( worldname.."_Entities", { "name", "etype" }, tinysrv.entitySystemProc )
 
 		tinsert(self.worlds, self.current_world)
 		self.systems_lookup[worldname] = utils.tcount(self.worlds)
@@ -191,7 +231,7 @@ end
 
 ------------------------------------------------------------------------------------------------------------
 
-worldmanager.default = worldmanager.default or worldmanager.addWorld(worldmanager, "DefaultWorld")
+worldmanager.default = worldmanager.default or worldmanager.addWorld(worldmanager, "MasterWorld")
 
 ------------------------------------------------------------------------------------------------------------
 

@@ -22,6 +22,7 @@ local tinyserver	= {
 
     entities            = {},
     entities_lookup     = {},
+    cameras_lookup      = {},
 
     update              = true,
     fps                 = 0,
@@ -111,6 +112,9 @@ tinyserver.entitySystemProc = function(self, e, dt)
         tinsert(tinyserver.entities, v)
         idx = utils.tcount(tinyserver.entities)
         tinyserver.entities_lookup[e.id] = idx
+        if(e.etype == "camera") then 
+            tinyserver.cameras_lookup[e.id] = idx
+        end
     else
 
         -- Continually updates the entities
@@ -122,6 +126,7 @@ tinyserver.entitySystemProc = function(self, e, dt)
 
                 e.pos = go.get_position(e.go)
                 e.rot = go.get_rotation(e.go)
+                e.scale = go.get_scale(e.go)
             end
         end
     end

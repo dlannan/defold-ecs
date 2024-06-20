@@ -17,11 +17,32 @@ $(document).ready(function() {
     let index = $("#systems-title").attr("data");
     let system = g_systems.systems[index];
     let senddata = { enabled: enabled, system: system };
-
     // Probably should check status and data
     postData("/systems/enable", senddata, function(data, status) {
     });
   });
+
+  if(g_allsystems_enabled == true) {
+    $('#allsystems-enable').prop('checked',true); 
+    $('#allsystems-disable').prop('checked',false); 
+  }else{
+    $('#allsystems-enable').prop('checked',false); 
+    $('#allsystems-disable').prop('checked',true); 
+  }  
+
+  $(".allsystems-set-enable").on('click', function(e) {
+    let name = $(e.target).attr("data");
+    g_allsystems_enabled = false;
+    if(name == "enable") g_allsystems_enabled = true;
+
+    let systems = g_systems.systems;
+    for( var i=0; i<systems.length; i++) {
+      let senddata = { enabled: g_allsystems_enabled, system: systems[i] };
+      // Probably should check status and data
+      postData("/systems/enable", senddata, function(data, status) {
+      });
+    }
+  });  
 
   $(".dropdown-item").on('click', function (e) {
 
