@@ -39,6 +39,9 @@ $(document).ready(function() {
       html_cameras = html_cameras + '</div>';
       html_cameras = html_cameras + '<div class="col pl-5">';
       html_cameras = html_cameras + '<a href="#!"><h6>' + cam.name + '</h6></a>';
+      html_cameras = html_cameras + '</div>';
+      html_cameras = html_cameras + '<div class="col-2 pl-5">';
+      html_cameras = html_cameras + '<a href="#!" style="color: white;padding-top:6px;"><h4><i data="' + cam.go + '" class="ik ik-aperture camera-select"></i></h4></a>';
       html_cameras = html_cameras + '</div></div>';
     });
     
@@ -46,5 +49,10 @@ $(document).ready(function() {
     UpdateCameraProps(0);
   });
 
-  UpdateCameraProps(0);
+  $(".camera-select").on("click", function(e) {
+  
+      let go = $(e.target).attr("data");
+      console.log(go);
+      postData("/world/camera/enable", { go: go }, function() {});
+  });
 });

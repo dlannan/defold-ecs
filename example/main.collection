@@ -203,3 +203,52 @@ embedded_instances {
     z: 1.0
   }
 }
+embedded_instances {
+  id: "go"
+  data: "embedded_components {\n"
+  "  id: \"model\"\n"
+  "  type: \"model\"\n"
+  "  data: \"mesh: \\\"/builtins/assets/meshes/quad_2x2.dae\\\"\\n"
+  "skeleton: \\\"\\\"\\n"
+  "animations: \\\"\\\"\\n"
+  "default_animation: \\\"\\\"\\n"
+  "name: \\\"{{NAME}}\\\"\\n"
+  "materials {\\n"
+  "  name: \\\"default\\\"\\n"
+  "  material: \\\"/builtins/materials/model.material\\\"\\n"
+  "  textures {\\n"
+  "    sampler: \\\"tex0\\\"\\n"
+  "    texture: \\\"/builtins/assets/images/logo/logo_blue_1024.png\\\"\\n"
+  "  }\\n"
+  "}\\n"
+  "\"\n"
+  "  position {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "  }\n"
+  "  rotation {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "    w: 1.0\n"
+  "  }\n"
+  "}\n"
+  ""
+  position {
+    x: 0.0
+    y: -5.0
+    z: 0.0
+  }
+  rotation {
+    x: -0.70710677
+    y: 0.0
+    z: 0.0
+    w: 0.70710677
+  }
+  scale3 {
+    x: 20.0
+    y: 20.0
+    z: 1.0
+  }
+}

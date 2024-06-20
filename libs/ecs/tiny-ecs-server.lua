@@ -23,6 +23,8 @@ local tinyserver	= {
     entities            = {},
     entities_lookup     = {},
     cameras_lookup      = {},
+    
+    change_camera       = ni,
 
     update              = true,
     fps                 = 0,
@@ -106,19 +108,10 @@ tinyserver.entitySystemProc = function(self, e, dt)
 
     if(tinyserver.update == false) then return end 
     
-    local idx = 1
-    if( e.id and tinyserver.entities_lookup[e.id] == nil ) then 
+    if( e.id and tinyserver.entities_lookup[e.id] ) then 
         
-        tinsert(tinyserver.entities, e)
-        idx = utils.tcount(tinyserver.entities)
-        tinyserver.entities_lookup[e.id] = idx
-        if(e.etype == "camera") then 
-            tinyserver.cameras_lookup[e.id] = idx
-        end
-    else
-
         -- Continually updates the entities
-        idx = tinyserver.entities_lookup[e.id]
+        local idx = tinyserver.entities_lookup[e.id]
         if(idx) then 
             tinyserver.entities[idx] = e
             -- Check for pos/rot updates - check for gamne object 
@@ -146,9 +139,10 @@ end
 
 ------------------------------------------------------------------------------------------------------------
 
-tinyserver.setEntities = function(  entities )
+tinyserver.setEntities = function(  entities, entities_lookup, cameras_lookup )
     tinyserver.entities = entities
-    tinyserver.entities_lookup = {}
+    tinyserver.entities_lookup = entities_lookup
+    tinyserver.cameras_lookup = cameras_lookup
 end
 
 ------------------------------------------------------------------------------------------------------------
@@ -171,6 +165,13 @@ end
 ------------------------------------------------------------------------------------------------------------
 
 tinyserver.update = function ()
+    if(tinyserver.change_camera) then 
+        pprint('Changing camera to: '..tinyserver.change_camera)
+        msg.post(tinyserver.change_camera, "acquire_camera_focus")
+        msg.post(tinyserver.change_camera, "acquire_camera_focus")
+        tinyserver.change_camera = nil
+    end
+
     -- metrics updated 
     tinyserver.fps = fps.fps()
     tinyserver.mem = mem.mem()

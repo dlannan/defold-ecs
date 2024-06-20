@@ -43,9 +43,7 @@ local posts_cameraenable = {
         end
 
         local cdata = json.decode(body)
-        local camera = route.ecs_server.entities[cdata.index]
-        msg.post(camera.go, "acquire_camera_focus")
-        
+        route.ecs_server.change_camera = cdata.go        
         return route.http_server.html("success")
     end,
 }

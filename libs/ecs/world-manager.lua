@@ -15,6 +15,7 @@ local worldmanager = {
 	systems_lookup = {},
 	entities = {},
 	entities_lookup = {},
+	cameras_lookup = {},
 }
 
 ------------------------------------------------------------------------------------------------------------
@@ -87,10 +88,10 @@ worldmanager.addCamera = function( self, name, objurl )
 	local pos = go.get_position(objurl)
 	local rot = go.get_rotation(objurl)
 
-	local aspect = go.get(objurl, "aspect_ratio") -- get aspect ratio
-	local near = go.get(objurl, "near_z") -- get far z
-	local far = go.get(objurl, "far_z") -- get far z
-	local fov = go.get(objurl, "fov") -- get field of view
+	local aspect = go.get(objurl.."#camera", "aspect_ratio") -- get aspect ratio
+	local near = go.get(objurl.."#camera", "near_z") -- get far z
+	local far = go.get(objurl.."#camera", "far_z") -- get far z
+	local fov = go.get(objurl.."#camera", "fov") -- get field of view
 
 	local id = hash_to_hex(hash(objurl))
 	local obj = {
@@ -113,6 +114,7 @@ worldmanager.addCamera = function( self, name, objurl )
 	-- Keep some handles so we can easily remove
 	tinsert(self.entities, obj)
 	self.entities_lookup[obj.id] = utils.tcount(self.entities)
+	self.cameras_lookup[obj.id] = utils.tcount(self.entities)
 	return tiny.addEntity(self.current_world, obj)
 end
 
@@ -205,7 +207,7 @@ worldmanager.init = function(self, options)
 	self:processOptions(options)
 	tinysrv.init()
 	tinysrv.setWorlds(self.worlds)
-	tinysrv.setEntities(self.entities)
+	tinysrv.setEntities(self.entities, self.entities_lookup, self.cameras_lookup)
 	tinysrv.setSystems(self.systems)
 end
 

@@ -19,6 +19,7 @@ local entitydata = {
         end)        
 
         entities = entities:gsub("vmath.quat", "quat")
+        
         return route.http_server.json(entities)
     end,
 }
