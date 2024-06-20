@@ -88,10 +88,10 @@ worldmanager.addCamera = function( self, name, objurl )
 	local pos = go.get_position(objurl)
 	local rot = go.get_rotation(objurl)
 
-	local aspect = go.get(objurl.."#camera", "aspect_ratio") -- get aspect ratio
-	local near = go.get(objurl.."#camera", "near_z") -- get far z
-	local far = go.get(objurl.."#camera", "far_z") -- get far z
-	local fov = go.get(objurl.."#camera", "fov") -- get field of view
+	local aspect = go.get(objurl, "aspect_ratio") -- get aspect ratio
+	local near = go.get(objurl, "near_z") -- get far z
+	local far = go.get(objurl, "far_z") -- get far z
+	local fov = go.get(objurl, "fov") -- get field of view
 
 	local id = hash_to_hex(hash(objurl))
 	local obj = {

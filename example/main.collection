@@ -252,3 +252,46 @@ embedded_instances {
     z: 1.0
   }
 }
+embedded_instances {
+  id: "anglecamera"
+  data: "embedded_components {\n"
+  "  id: \"camera\"\n"
+  "  type: \"camera\"\n"
+  "  data: \"aspect_ratio: 1.0\\n"
+  "fov: 0.7854\\n"
+  "near_z: 0.1\\n"
+  "far_z: 1000.0\\n"
+  "auto_aspect_ratio: 1\\n"
+  "orthographic_projection: 0\\n"
+  "orthographic_zoom: 1.0\\n"
+  "\"\n"
+  "  position {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "  }\n"
+  "  rotation {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "    w: 1.0\n"
+  "  }\n"
+  "}\n"
+  ""
+  position {
+    x: 8.0
+    y: 8.0
+    z: 8.0
+  }
+  rotation {
+    x: -0.30645803
+    y: 0.25419778
+    z: 0.13241887
+    w: 0.9077071
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}

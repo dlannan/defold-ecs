@@ -54,8 +54,9 @@ function init(self)
 	go.set("#sphere", "light", self.light)
 
 
-	self.cam = wm:addCamera( "camera", "/camera" )
-	self.topcam = wm:addCamera( "topcamera", "/topcamera" )
+	self.cam = wm:addCamera( "camera", "/camera#camera" )
+	self.topcam = wm:addCamera( "topcamera", "/topcamera#camera" )
+	self.anglecam = wm:addCamera( "anglecamera", "/anglecamera#camera" )
 	
 	-- Add cameras as entities 
 	self.main = wm:addGameObject( "main", "/main" )
