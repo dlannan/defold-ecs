@@ -24,7 +24,8 @@ local tinyserver	= {
     entities_lookup     = {},
     cameras_lookup      = {},
     
-    change_camera       = ni,
+    change_camera       = nil,
+    current_camera      = "camera",
 
     update              = true,
     fps                 = 0,
@@ -167,7 +168,9 @@ end
 tinyserver.update = function ()
     if(tinyserver.change_camera) then 
         pprint('Changing camera to: '..tinyserver.change_camera)
+        msg.post(tinyserver.current_camera, "release_camera_focus")
         msg.post(tinyserver.change_camera, "acquire_camera_focus")
+        tinyserver.current_camera = tinyserver.change_camera
         tinyserver.change_camera = nil
     end
 
