@@ -8,10 +8,10 @@ instances {
     z: 0.0
   }
   rotation {
-    x: 0.0
+    x: 1.0
     y: 0.0
     z: 0.0
-    w: 1.0
+    w: 6.123234E-17
   }
   component_properties {
     id: "ecs"
@@ -27,10 +27,109 @@ instances {
     z: 1.0
   }
 }
+instances {
+  id: "lumiere"
+  prototype: "/lumiere/lumiere.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "grain"
+  prototype: "/lumiere/effects/grain/grain.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "lcd"
+  prototype: "/lumiere/effects/lcd/lcd.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "scanlines"
+  prototype: "/lumiere/effects/scanlines/scanlines.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "blur"
+  prototype: "/lumiere/effects/blur/blur.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
 scale_along_z: 0
 embedded_instances {
   id: "main"
-  children: "ecs"
   data: "components {\n"
   "  id: \"cube\"\n"
   "  component: \"/assets/models/cube.model\"\n"
@@ -204,7 +303,7 @@ embedded_instances {
   }
 }
 embedded_instances {
-  id: "go"
+  id: "ground"
   data: "embedded_components {\n"
   "  id: \"model\"\n"
   "  type: \"model\"\n"
@@ -288,6 +387,30 @@ embedded_instances {
     y: 0.25419778
     z: 0.13241887
     w: 0.9077071
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+embedded_instances {
+  id: "effects"
+  children: "blur"
+  children: "grain"
+  children: "lcd"
+  children: "scanlines"
+  data: ""
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
   }
   scale3 {
     x: 1.0

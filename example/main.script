@@ -53,7 +53,6 @@ function init(self)
 	go.set("#quad", "light", self.light)
 	go.set("#sphere", "light", self.light)
 
-
 	self.cam = wm:addCamera( "camera", "/camera#camera" )
 	self.topcam = wm:addCamera( "topcamera", "/topcamera#camera" )
 	self.anglecam = wm:addCamera( "anglecamera", "/anglecamera#camera" )
@@ -77,6 +76,7 @@ end
 ------------------------------------------------------------------------------------------------------------
 
 function update(self, dt)
+
 	angle = angle + 5.0 * dt
 	if(angle > 360) then angle = angle - 360.0 end
 end

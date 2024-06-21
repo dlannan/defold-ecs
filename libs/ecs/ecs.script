@@ -11,9 +11,19 @@ local wm 		= require("libs.ecs.world-manager")
 local fps 		= require("libs.metrics.fps")
 local mem 		= require("libs.metrics.mem")
 
+local grain 	= require("lumiere.effects.grain.grain")
+local lcd 		= require("lumiere.effects.lcd.lcd")
+local scanlines = require("lumiere.effects.scanlines.scanlines")
+local blur 		= require("lumiere.effects.blur.blur")
+
+local lumiere = require("lumiere.lumiere")
+
 ------------------------------------------------------------------------------------------------------------
 
 function init(self)
+
+	self.effects = {}
+	
 	local options = { host = self.server_host, port = self.server_port, noserver = not self.server }
 	wm:init( options )
 end
@@ -40,7 +50,31 @@ end
 
 ------------------------------------------------------------------------------------------------------------
 
+local function toggle_effect( self, effect )
+	for k,v in ipairs(self.effects) do
+		if(v == effect) then table.remove(self.effects, k); return end
+	end
+	table.insert(self.effects, effect)
+end
+
 function on_message(self, message_id, message, sender)
+
+	if message_id == hash("effects_none") then
+		self.effects = {}
+		lumiere.use_effects(self.effects)
+	elseif message_id == hash("grain") then
+		toggle_effect(self, grain)
+		lumiere.use_effects(self.effects)
+	elseif message_id == hash("scanlines") then
+		toggle_effect(self, scanlines)
+		lumiere.use_effects(self.effects)
+	elseif message_id == hash("lcd") then
+		toggle_effect(self, lcd)
+		lumiere.use_effects(self.effects)
+	elseif message_id == hash("blur") then
+		toggle_effect(self, blur)
+		lumiere.use_effects(self.effects)
+	end
 end
 
 ------------------------------------------------------------------------------------------------------------

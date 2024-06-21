@@ -48,12 +48,26 @@ local posts_cameraenable = {
     end,
 }
 
+local posts_cameraeffect = {
+    pattern = "/world/camera/effect$",
+    func = function(matches, stream, headers, body)
+
+        if(body == nil) then 
+            return route.http_server.html("failed. no post data.")
+        end
+
+        local cdata = json.decode(body)
+        if(cdata.effect) then msg.post("/ecs", cdata.effect) end
+        return route.http_server.html("success")
+    end,
+}
 
 route.routes = {
     posts_form,
     posts_systems,
 
     posts_cameraenable,
+    posts_cameraeffect,
 }
 
 return route

@@ -1,0 +1,15 @@
+go.property("lut", resource.atlas("/lumiere/effects/colorgrade/colorgrade_lut.atlas"))
+
+local colorgrade = require "lumiere.effects.colorgrade.colorgrade"
+
+function init(self)
+	self.current_lut = self.lut
+	go.set("#lut", "image", self.lut)
+end
+
+function update(self, dt)
+	if self.current_lut ~= self.lut then
+		self.current_lut = self.lut
+		go.set("#lut", "image", self.lut)
+	end
+end
