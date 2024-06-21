@@ -629,7 +629,7 @@ a:hover, a:focus, a:active { outline: 0; text-decoration: none; color: #212121; 
 .card .card-header .card-header-right .card-option { width: 35px; height: 25px; overflow: hidden; margin: 0; -moz-transition: 0.3s ease-in-out; -o-transition: 0.3s ease-in-out; -webkit-transition: 0.3s ease-in-out; transition: 0.3s ease-in-out; }
 .card .card-header .card-header-right .card-option li { display: inline-block; }
 .card .card-header .card-header-right .card-option li i { margin: 0 5px; cursor: pointer; font-size: 15px; color: #8c8c8c; line-height: 2; font-weight: 300; }
-.card .card-block { padding: 1.25rem; }
+.card .card-block { padding: 1.25rem; background-color: #313131;}
 .card .card-body .icon { font-size: 37px; color: #9aa0ac; }
 .card .feeds-widget { padding: 0; }
 .card .feeds-widget .feed-item { display: block; padding: 12px 15px; border: 1px solid #efefef; border-left: 0; border-right: 0; }
@@ -2268,3 +2268,5 @@ hr { box-sizing: content-box; height: 0; margin-top: 1rem; border: 0; border-top
 
 .demo-placeholder .flot-text { color: #fff !important; }
 /*# sourceMappingURL=theme.css.map */
+
+.scroll-widget a { color: #ccc; }
