@@ -34,12 +34,12 @@ $(document).ready(function() {
     
     cameras.cameras.forEach( function(cam, index, arr) {
       console.log(index);
-      html_cameras = html_cameras + '<div class="row">';
+      html_cameras = html_cameras + '<div class="row camera-select" data="'+ index + '">';
       html_cameras = html_cameras + '<div class="col-auto text-right update-meta pr-0">';
       html_cameras = html_cameras + '<i class="ik ik-camera bg-blue update-icon"></i>';
       html_cameras = html_cameras + '</div>';
       html_cameras = html_cameras + '<div class="col pl-5">';
-      html_cameras = html_cameras + '<div class="camera-select" data="'+ index + '"><a href="#!"><h6>' + cam.name + '</h6></a></div>';
+      html_cameras = html_cameras + '<a href="#!"><h6>' + cam.name + '</h6></a>';
       html_cameras = html_cameras + '</div>';
       html_cameras = html_cameras + '<div class="col-2 pl-5">';
       html_cameras = html_cameras + '<a href="#!" style="color: white;padding-top:6px;"><h4><i name="'+ cam.name + '" data="' + cam.go + '" class="ik ik-aperture camera-set"></i></h4></a>';
@@ -51,7 +51,6 @@ $(document).ready(function() {
   });
 
   $(".camera-select").on("click", function(e) {
-    console.log(this);
     let index = $(this).attr("data");
     g_current_camera = Number(index);
     UpdateCameraProps();

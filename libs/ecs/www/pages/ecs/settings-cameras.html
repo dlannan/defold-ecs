@@ -34,35 +34,35 @@
 
                 <div class="card">
                     <div class="card-header">
-                        <h3>Cameras Settings</h3>
+                        <h3>Cameras Recording</h3>
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-sm-12">
-                                <h4 class="sub-title">Disable Cameras</h4>
-                                <div class="form-radio">
-                                    <form>
-                                        <div class="radio radio-outline radio-inline">
-                                            <label>
-                                                <input type="radio" name="radio" checked="checked">
-                                                <i class="helper"></i>Enable
-                                            </label>
-                                        </div>
-                                        <div class="radio radio-outline radio-inline">
-                                            <label>
-                                                <input type="radio" name="radio">
-                                                <i class="helper"></i>Disable
-                                            </label>
-                                        </div>
-                                    </form>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">                                
+                                    <div >Screenshot Capture</div>
+                                </div>
+                                <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                                    <button type="button" class="btn btn-secondary">Start</button>
                                 </div>
                             </div>
                         </div>
                         <h4 class="sub-title"></h4>
-                        <div class="form-group row">
-                            <label for="general-settings-updaterate" class="col-sm-3 col-form-label">Update Rate (ms)</label>
+                        <div class="row">
+                            <div class="col-md-12">
+                            <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                                Video Capture
+                                <button type="button" class="btn btn-secondary">Start</button>
+                            </div>
+                            </div>
+                        </div>
+                        <h4 class="sub-title"></h4>
+                        <div class="row">
+                            <div class="col-md-12">
+                            <label for="general-settings-updaterate" class="col-sm-3 col-form-label">Capture Folder</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="general-settings-updaterate" placeholder="16">
+                                <input type="text" class="form-control" id="camera-settings-capture-folder" placeholder="libs/ecs/capture">
+                            </div>
                             </div>
                         </div>    
                     </div>
