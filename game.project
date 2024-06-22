@@ -26,3 +26,8 @@ bundle_identifier = com.gagagames.example.defoldecs
 [ios]
 bundle_identifier = com.gagagames.example.defoldecs
 
+[render]
+clear_color_red = 0.52
+clear_color_green = 0.804
+clear_color_blue = 0.917
+

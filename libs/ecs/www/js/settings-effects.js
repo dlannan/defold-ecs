@@ -20,4 +20,9 @@ $(document).ready(function() {
     postData( "/world/camera/effect", { effect: "lcd" }, function() {});
   });
 
+  $("#vignette-effect").on("click", function(e) {
+    $(this).val( 1 - $(this).val() );
+    postData( "/world/camera/effect", { effect: "vignette" }, function() {});
+  });
+
 });

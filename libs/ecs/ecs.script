@@ -15,6 +15,7 @@ local grain 	= require("lumiere.effects.grain.grain")
 local lcd 		= require("lumiere.effects.lcd.lcd")
 local scanlines = require("lumiere.effects.scanlines.scanlines")
 local blur 		= require("lumiere.effects.blur.blur")
+local vig 		= require("lumiere.effects.vignette.vignette")
 
 local lumiere = require("lumiere.lumiere")
 
@@ -74,6 +75,9 @@ function on_message(self, message_id, message, sender)
 	elseif message_id == hash("blur") then
 		toggle_effect(self, blur)
 		lumiere.use_effects(self.effects)
+	elseif message_id == hash("vignette") then
+		toggle_effect(self, vig)
+		lumiere.use_effects(self.effects)		
 	end
 end
 

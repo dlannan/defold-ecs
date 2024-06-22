@@ -127,6 +127,26 @@ instances {
     z: 1.0
   }
 }
+instances {
+  id: "vignette"
+  prototype: "/lumiere/effects/vignette/vignette.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
 scale_along_z: 0
 embedded_instances {
   id: "main"
@@ -400,6 +420,7 @@ embedded_instances {
   children: "grain"
   children: "lcd"
   children: "scanlines"
+  children: "vignette"
   data: ""
   position {
     x: 0.0
