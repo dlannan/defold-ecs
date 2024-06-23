@@ -35,33 +35,30 @@ And that should be all thats needed for copying and setup.
 ## Init and Runtime
 
 In a script in your game/application where the initial game system runs from add:
+
 ```local wm	= require("libs.ecs.world-manager")```
 
 In the ```init(self)``` function add cameras, objects, and systems as needed. The methods provided are:
 
-----
-**wm:addCamera( < camera_name > , < camera_url > )**
+### **wm:addCamera( < camera_name > , < camera_url > )**
 
 Add a camera with the unique name camera_name and its associated url. 
 
 Example: ```wm:addCamera( "camera", "/camera#camera" )```
 
-----
-**wm:addGameObject( < game_object_name > , < game_object_url > )**
+### **wm:addGameObject( < game_object_name > , < game_object_url > )**
 
 Add a game object with the unique name game_object_name and its associated url. 
 
 Example: ```wm:addGameObject( "cube", "/main/cube" )```
 
-----
-**wm:addEntity( < entity_pos > , < entity_rot >, < entity_object > )**
+### **wm:addEntity( < entity_pos > , < entity_rot >, < entity_object > )**
 
 Add an entity with its position, rotation, and the object table. This is different to addGameObject and allows non-Defold game objects to be added.
 
 Example: ```wm:addEntity( position, rotation, obj )```
 
-----
-**wm:addSystem( < system_name > , < filter_table >, < callback_function > )**
+### **wm:addSystem( < system_name > , < filter_table >, < callback_function > )**
 
 Add a system filter passing in a unique system_name, a filter set and a callback for the filtered entities. 
 
