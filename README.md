@@ -38,7 +38,7 @@ In a script in your game/application where the initial game system runs from add
 
 ```local wm	= require("libs.ecs.world-manager")```
 
-In the ```init(self)``` function add cameras, objects, and systems as needed. The methods provided are:
+In the ```init(self)``` function add cameras, objects, and systems as needed. It is also fine to add and remote these entities at runtime as well. 
 
 ### **wm:addCamera( < camera_name > , < camera_url > )**
 
@@ -57,6 +57,12 @@ Example: ```wm:addGameObject( "cube", "/main/cube" )```
 Add an entity with its position, rotation, and the object table. This is different to addGameObject and allows non-Defold game objects to be added.
 
 Example: ```wm:addEntity( position, rotation, obj )```
+
+### **wm:removeEntity( entity_id )**
+
+Remove and entity from the ECS. The entity id is generated and should be accessible in any entity as entity.id  
+
+Example: ```wm:removeEntity( entity.id )```
 
 ### **wm:addSystem( < system_name > , < filter_table >, < callback_function > )**
 
