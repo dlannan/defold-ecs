@@ -38,7 +38,7 @@ In a script in your game/application where the initial game system runs from add
 
 ```local wm	= require("libs.ecs.world-manager")```
 
-In the ```init(self)``` function add cameras, objects, and systems as needed. It is also fine to add and remote these entities at runtime as well. 
+In the ```init(self)``` function add cameras, objects, and systems as needed. It is also fine to add and remove these entities at runtime as well. 
 
 ### **wm:addCamera( < camera_name > , < camera_url > )**
 
