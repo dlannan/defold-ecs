@@ -42,9 +42,9 @@ In the ```init(self)``` function add cameras, objects, and systems as needed. It
 
 ### **wm:addCamera( < camera_name > , < camera_url > )**
 
-Add a camera with the unique name camera_name and its associated url. 
+> Add a camera with the unique name camera_name and its associated url. 
 
-Example: ```wm:addCamera( "camera", "/camera#camera" )```
+> Example: ```wm:addCamera( "camera", "/camera#camera" )```
 
 ### **wm:addGameObject( < game_object_name > , < game_object_url > )**
 
