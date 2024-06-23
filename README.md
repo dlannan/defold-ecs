@@ -48,31 +48,31 @@ In the ```init(self)``` function add cameras, objects, and systems as needed. It
 
 ### **wm:addGameObject( < game_object_name > , < game_object_url > )**
 
-Add a game object with the unique name game_object_name and its associated url. 
+> Add a game object with the unique name game_object_name and its associated url. 
 
-Example: ```wm:addGameObject( "cube", "/main/cube" )```
+> Example: ```wm:addGameObject( "cube", "/main/cube" )```
 
 ### **wm:addEntity( < entity_pos > , < entity_rot >, < entity_object > )**
 
-Add an entity with its position, rotation, and the object table. This is different to addGameObject and allows non-Defold game objects to be added.
+> Add an entity with its position, rotation, and the object table. This is different to addGameObject and allows non-Defold game objects to be added.
 
-Example: ```wm:addEntity( position, rotation, obj )```
+> Example: ```wm:addEntity( position, rotation, obj )```
 
 ### **wm:removeEntity( entity_id )**
 
-Remove and entity from the ECS. The entity id is generated and should be accessible in any entity as entity.id  
+> Remove and entity from the ECS. The entity id is generated and should be accessible in any entity as entity.id  
 
-Example: ```wm:removeEntity( entity.id )```
+> Example: ```wm:removeEntity( entity.id )```
 
 ### **wm:addSystem( < system_name > , < filter_table >, < callback_function > )**
 
-Add a system filter passing in a unique system_name, a filter set and a callback for the filtered entities. 
+> Add a system filter passing in a unique system_name, a filter set and a callback for the filtered entities. 
 
-Systems are described in detail in the Tiny ECS doc here: <https://bakpakin.github.io/tiny-ecs/doc/#System_functions>
+> Systems are described in detail in the Tiny ECS doc here: <https://bakpakin.github.io/tiny-ecs/doc/#System_functions>
 
-More information will be added.
+> More information will be added.
 
-Example: ```wm:addSystem( "MoverProcess", { "name", "etype" }, moverUpdate)```
+> Example: ```wm:addSystem( "MoverProcess", { "name", "etype" }, moverUpdate)```
 
 
 ## Http Server
