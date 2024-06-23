@@ -86,3 +86,19 @@ Example: ```http://127.0.0.1:9190/index.html```
 
 This should also work on mobile connected to the same network. Being http this is not a secure connection, but it is intended as a debugging and configuration tool. Remember to disable the Server when releasing builds to users.
 
+## Lumiere and Camera Effects
+
+The excellent Lumiere package is include so that effects can be added to the camera. This library needed modifications for it to be able to work well with ECS. 
+
+An additional effect was added as well - vignette. 
+
+### Setup
+
+1. Copy the lumiere folder into your project root.
+2. Copy the render folder into your project root. If you have your own render script then you will need to examine the example render_script and integrate it with your own.
+3. Follow the instructions for setup of lumiere: <https://github.com/britzl/lumiere> or;
+4. Add the lumiere.go to your collection and add an effects folder with all the effect you want to include. See example and ecs.script for setup.
+
+Lumiere can impact performance if you have a number of the effects all turned on. Especially on larger resolutions. 
+
+
